@@ -1,0 +1,78 @@
+* {
+  margin: 20px;
+  font-family: sans-serif;
+}
+tr:nth-child(even) {
+  background-color: #e0ebeb;
+}
+th {
+  background-color: #6699ff;
+  color: white;
+}
+
+tr:nth-child(odd) {
+  background-color: #ccddff;
+}
+.table {
+  border: 1px solid white;
+  width: max-content;
+}
+.Header h1 {
+  text-align: center;
+  background-color: #c3d4f5e2;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 150%;
+  padding: 10px;
+}
+.Details h3 {
+  font-size: 15px;
+  font-family: calibri;
+  font-weight: 100;
+}
+
+.img {
+  background-color: #689cfc;
+}
+.table1 {
+  width: 100%;
+  margin-bottom: 0px;
+}
+td {
+  text-align: center;
+  padding: 5px;
+}
+.table2 {
+  width: 100%;
+  margin-top: -1px;
+}
+
+.Details h2 {
+  text-align: center;
+  color: #660000;
+}
+.form h1 {
+  text-align: center;
+  background-color: #c3d4f5e2;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 150%;
+}
+form {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.pay_btn{
+    margin: auto;
+    width:30%;
+}
+
+.payment_btn {
+  text-align: center;
+  padding: 15px 32px;
+  color: white;
+  background-color: #689cfc;
+  display: inline-block;
+  font-size: 16px;
+  border: #e0ebeb;
+  border-radius: 2px;
+}

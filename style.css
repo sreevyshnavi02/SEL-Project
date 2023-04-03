@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.header {
+  background-color: rgb(62, 86, 98);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin: 0 0 2rem 0;
+  display: flex;
+}
+
+table {
+  margin: auto;
+  min-width: 50%;
+}
+
+.univ_name {
+  margin: 1rem;
+  text-align: center;
+  width: 90%;
+}
+
+.logo > img {
+  width: 100%;
+  height: auto;
+}
+
+.main_heading {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.get_input_details,
+.upload_marks,
+.get_csv_file,
+.get_session_form,
+.track_credits,
+.login,
+.oec_options {
+  margin: 1rem auto 1rem auto;
+  height: fit-content;
+  width: 75%;
+  padding: 1rem;
+  border: 1px;
+  border-radius: 1px;
+  background-color: rgb(192, 206, 206);
+  display: block;
+  align-items: center;
+}
+
+.label_regno,
+.label_session,
+.label_session_month,
+.label_session_year,
+.label_OTP {
+  /* background-color: blueviolet; */
+  margin: 1rem auto 1rem auto;
+  text-align: center;
+  font-weight: 700;
+}
+
+#regno,
+#otp,
+.input_session,
+#session_month,
+#session_year {
+  /* input field */
+  margin: 1rem auto 1rem auto;
+  display: block;
+  width: 50%;
+  min-height: 2rem;
+  font-weight: 700;
+  text-align: center;
+  font-size: larger;
+}
+
+.input_course_code {
+  padding: 1rem;
+}
+
+.buttons-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.submit_option,
+.submit_marks_attendance,
+.submit_ext_marks,
+.btnn,
+.submit_session,
+.download_pdf {
+  background-color: rgb(72, 69, 69);
+  color: white;
+  padding: 1%;
+  margin: 1rem 40% 1rem 40%;
+  cursor: pointer;
+}
+
+.submit_option {
+  margin: auto;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.submit_login,
+.submit_sess_exam_regn {
+  background-color: rgb(72, 69, 69);
+  color: white;
+  font-weight: 700;
+  height: 2rem;
+  padding: 0.5rem;
+  display: block;
+  margin: 1rem auto 1rem auto;
+}
+
+.submit_login:hover,
+.submit_sess_exam_regn:hover {
+  background-color: rgb(229, 229, 217);
+  color: black;
+}
+
+/* buttons on home page */
+.btnn,
+.submit_session {
+  font-size: 1.5em;
+  min-width: 50%;
+  margin: 1rem auto 1rem auto;
+  display: block;
+}
+
+/* colors of the links */
+a {
+  text-decoration: none;
+}
+
+a:link > button {
+  color: white;
+}
+
+/* a:visited > button {
+  color: rgb(221, 250, 184);
+} */
+
+a:hover > button {
+  background-color: rgb(229, 229, 217);
+  color: black;
+  font-weight: 700;
+}
+
+.course_details {
+  text-align: center;
+  margin: 1rem auto 1rem auto;
+  font-weight: bold;
+  background-color: rgb(192, 206, 206);
+  padding: 1rem 0 1rem 0;
+}
+
+.marks_table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+tr,
+th,
+td {
+  border: 1px solid black;
+  padding: 0.5rem;
+  text-align: center;
+}

@@ -1,0 +1,259 @@
+<table cellpadding = "10">
+        <form action="insertion.php" method="post" enctype="multipart/form-data">
+            <!--------------------- First Name ------------------------------------------>
+            <tr>
+            <td>Full Name (with Initials at back)</td>
+            <td><input type="text" name="FirstName" maxlength="100"  />
+            </td>
+            </tr>
+
+            <!------------------------ Application number --------------------------------------->
+            <tr>
+            <td>Application number</td>
+            <td><input type="varchar" name="LastName" maxlength="20" />
+            </td>
+            </tr>
+            <!---------------------- Centac/Josaa ------------------------------------->
+            <tr>
+            <td>Centac/Josaa</td>
+            <td>
+            <input type="radio" name="Centac/Josaa" value="Centac" />
+            Centac
+            <input type="radio" name="Centac/Josaa" value="Josaa" />
+            Josaa
+            </td>
+            </tr>
+            <!--------------------- Father's Name ------------------------------------------>
+            <tr>
+            <td>Father's Name</td>
+            <td><input type="text" name="Father_name" maxlength="50"  />
+
+            </td>
+            </tr>
+            <!--------------------- Mother's Name ------------------------------------------>
+            <tr>
+            <td>Mother's Name</td>
+            <td><input type="text" name="Mother_name" maxlength="50"  />
+
+            </td>
+            </tr>
+            <!--------------------------Date Of Birth----------------------------------->
+            <tr>
+            <td>Date of Birth(DOB)</td>
+            <td>
+            
+            </td>
+            </tr>
+
+            <!---------------------- Year ------------------------------------->
+            <tr>
+            <td>Year</td>
+            <td>.$x['year_of_joining'].
+            </td>
+            </tr>
+            <!---------------------- Gender ------------------------------------->
+            <tr>
+            <td>Gender</td>
+            <td>.$x['gender'].
+            </td>
+            </tr>
+            <!-------------------------- Mobile Number ------------------------------------->
+            <tr>
+            <td>Mobile Number</td>
+            <td>
+            <input type="text" name="MobileNumber" maxlength="10" placeholder="9870xxxxxx"/>
+            (10 Digits Allowed)
+            </td>
+            </tr>
+
+            <!-------------------------- Email ID ------------------------------------->
+            <tr>
+            <td>Email ID</td>
+            <td><input type="email" name="EmailID" maxlength="100" placeholder="harry28@gmail.com"/></td>
+            </tr>
+
+
+            <!------------------------- Address ---------------------------------->
+            <tr>
+            <td>Address line<br /><br /><br /></td>
+            <td><textarea name="Address" rows="5" cols="50"></textarea></td>
+            </tr>
+
+
+            <!---------------------- Nationality ------------------------------------->
+            <tr>
+            <td>Nationality</td>
+            <td>
+            <input type="radio" name="Nationality" value="Indian" />
+            Indian
+            <input type="radio" name="Nationality" value="Others" />
+            Others
+            </td>
+            </tr>
+            <!---------------------------- Nationality-Others ----------------------------------->
+            <tr>
+            <td><nbsp><nbsp>       If others specify</td>
+            <td><input type="text" name="Other_Nationality" maxlength="50"/>
+            </td>
+            </tr>
+
+            <!---------------------------- Community ----------------------------------->
+            <tr>
+            <td>Community</td>
+            <td> 
+            <select name="caste" id="caste">
+            <option value = "obc"> Other Backward Caste
+            </option> 
+            <option value = "mbc"> Most Backword Caste
+            </option>
+            <option value = "bc"> Backward Caste
+            </option>
+            <option value = "oc"> Other Caste
+            </option>
+            <option value = "sc"> Scheduled Caste
+            </option>
+            <option value = "st"> Scheduled Tribes
+            </option>
+            </select>  
+            </td>
+            </tr>
+
+            <!---------------------- State ------------------------------------->
+            <tr>
+            <td>State</td>
+            <td>
+            <input type="radio" name="State" value="Puducherry" />
+            Puducherry
+            <input type="radio" name="State" value="Others" />
+            Others
+            </td>
+            </tr>
+            <!---------------------------- State-Others ----------------------------------->
+            <tr>
+            <td><nbsp><nbsp>If others specify</td>
+            <td><input type="text" name="Other_State" maxlength="50"/>
+            </td>
+            </tr>
+
+            <!---------------------- Regular ------------------------------------->
+
+            <tr>
+            <td>Method Of Study</td>
+            <td> 
+            <select name="type" id="regular">
+            <option value = "10"> Regular
+            </option> 
+            <option value = "20"> Lateral Entry
+            </option>
+            </select>  
+            </td>
+            </tr>
+
+
+            <!---------------------------- Programme ----------------------------------->
+            <tr>
+            <script>
+
+            var subjectObject = {
+                "B.Tech": {
+                "Computer Science and Engineering":[],
+                "Electronics and Communication Engineering":[],
+                "Information Technology":[],
+                "Electricals and Electronics Engineering":[],
+                "Electronics and Instrumentation Engineering":[],
+                "Chemical Engineering":[],
+                "Mechanical Engineering": ["Mechanical", "Mechtronics"],
+                "Civil Engineering":[],
+                
+                },
+                
+            "M.Tech": {
+                "Computer Science and Engineering": ["Data Science", "Information Security"],
+                "Electronics and Electrical Engineering":[],
+                "Information Technology":["Internet of Things"],
+                "Electronics and Instrumentation Engineering":[],
+                "Electronics and Communication Engineering": ["ECE", "WC"],
+                "Mechanical Engineering": ["Energy Technology", "PDM"],  
+                "Civil Engineering":[],	
+            },
+            "Ph.d Scholars": {
+                "Computer Science and Engineering": [],
+                "Electronics and Electrical Engineering":[],
+                "Information Technology":[],
+                "Electricals and Electronics Engineering":[],
+                "Electronics and Communication Engineering": [],
+                "Civil Engineering":[],	
+            },
+                "MCA": {
+                "Computer Science and Engineering": [], 
+            },
+
+            }
+            window.onload = function() {
+            var subjectSel = document.getElementById("subject");
+            var topicSel = document.getElementById("topic");
+            var chapterSel = document.getElementById("chapter");
+            for (var x in subjectObject) {
+                subjectSel.options[subjectSel.options.length] = new Option(x, x);
+            }
+            subjectSel.onchange = function() {
+                //empty Chapters- and Topics- dropdowns
+                chapterSel.length = 1;
+                topicSel.length = 1;
+                //display correct values
+                for (var y in subjectObject[this.value]) {
+                topicSel.options[topicSel.options.length] = new Option(y, y);
+                }
+            }
+            topicSel.onchange = function() {
+                //empty Chapters dropdown
+                chapterSel.length = 1;
+                //display correct values
+                var z = subjectObject[subjectSel.value][this.value];
+                for (var i = 0; i < z.length; i++) {
+                chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+                }
+            }
+            }
+            </script>
+            <tr>
+            <td>Programme:</td>
+            <td>
+            <select name="subject" id="subject">
+                <option value="" selected="selected">Select programme</option>
+            </select></td></tr>
+            <tr>
+            <td>Department: </td>
+            <td>
+            <select name="topic" id="topic">
+                <option value="" selected="selected">Select programme first</option>
+            </select></td></tr>
+            <tr>
+            <td>Specialization: </td>
+            <td><select name="chapter" id="chapter">
+                <option value="" selected="selected">Select dept first</option>
+            </select></td></tr>
+            
+            </tr>
+            <!--------------------- Photo ------------------------------------------>
+            <!-- <tr>
+            <td>Passport size photo upload</td>
+            <td><input type="file" name="image" id="fileToUpload" required> -->
+            <!--------<input type="submit" value="Upload Image" name="submit">----->
+            <!-- </td>
+            </tr> -->
+
+
+            <!----------------------- Submit and Reset ------------------------------->
+            <tr>
+            <td colspan="2" align="center">
+            <div class="buttons-flex">
+
+                <input class="submit_option" type="reset" value="Reset">
+                <input class="submit_option" type="submit" value="Submit">
+            </div>
+            </td>
+            </tr>
+        </table>
+    </form>
+</bo
