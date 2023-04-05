@@ -20,6 +20,20 @@
         //to get the session as input from the user
         $session = $_SESSION['chosen_session']; 
 
+        //------redirecting to the allotment order page if the student has already registered for oec----
+
+        //check if they have already regd
+        $check_stud_regd = $conn -> query ("select * from u_oec_allotment where regno = '$regno' and session = '$session';");
+        $num_rows = $check_stud_regd -> rowCount();
+
+        if($num_rows > 0){
+            header('Location: oec_allotment_order.php');
+        }
+
+        
+
+
+
         $stud_sem = $conn -> query ("select * from u_student where regno = '$regno';");
         $sem = $stud_sem -> fetchAll(PDO::FETCH_ASSOC);
         if($sem[0]['CURR_SEM'] >= 4 && $sem[0]['CURR_SEM'] <= 7){

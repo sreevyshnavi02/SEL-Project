@@ -145,7 +145,7 @@
             </tr>
             <!---------------------------- Nationality-Others ----------------------------------->
             <tr>
-            <td><nbsp><nbsp>       If others specify</td>
+            <td>If others specify</td>
             <td><input type="text" name="Other_Nationality" maxlength="50"/>
             </td>
             </tr>
@@ -187,32 +187,31 @@
 
 
             <!---------------------------- Programme ----------------------------------->
-            <tr>
+
+            <!-- fetching data from db -->
+
+            
 
             <tr>
             <td>Programme:</td>
             <td>
-            <select name="subject" id="subject">
+            <select name="prgm" id="prgm">
                 <option value="" selected="selected">Select programme</option>
             </select></td></tr>
             <tr>
             <td>Department: </td>
             <td>
-            <select name="topic" id="topic">
-                <option value="" selected="selected">Select programme first</option>
-            </select></td></tr>
-            <tr>
-            <td>Specialization: </td>
-            <td><select name="chapter" id="chapter">
-                <option value="" selected="selected">Select dept first</option>
-            </select></td></tr>
+            <select name="dept" id="dept">
+                <option value="" selected="selected">Select department</option>
+            </select></td></tr>           
             
             </tr>
+            
             <!--------------------- Photo ------------------------------------------>
-            <!-- <tr>
+            <tr>
             <td>Passport size photo upload</td>
-            <td><input type="file" name="image" id="fileToUpload" required> -->
-            <!--------<input type="submit" value="Upload Image" name="submit">----->
+            <td><input type="file" name="image" id="fileToUpload" required>
+            <input type="submit" value="Upload Image" name="submit">
             </td>
             </tr>
 
