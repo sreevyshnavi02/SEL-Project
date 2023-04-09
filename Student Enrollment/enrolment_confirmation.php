@@ -9,8 +9,7 @@
 </head>
 <body>
     
-</body>
-</html>
+
 <?php
     include '../connection.php';
     $sql = "SELECT sname,appn_num,centac_or_josaa,father_name,mother_name,dob,gender,phone,personal_email,address_line1, address_line2, address_state,nationality,community,entry_mode, yoj, p.prgm_name, d.dept_name
@@ -65,3 +64,18 @@
         </table></div>";
     }
 ?>
+
+<button class="btnn">Download</button>
+<script>
+    console.log('print pdf');
+    var button = document.getElementById("btnn");
+    var makepdf = document.getElementById("makepdf");
+
+    button.addEventListener("click", function () {
+        console.log("download btn clicked");
+        html2pdf().from(makepdf).save();
+    });
+</script> 
+
+</body>
+</html>
