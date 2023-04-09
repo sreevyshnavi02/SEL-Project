@@ -16,35 +16,40 @@
         $mother_name = $_REQUEST['Mother_name'];
         $Contact = $_REQUEST['MobileNumber'];
         $email = $_REQUEST['EmailID'];
-        $address = $_REQUEST['Address'];
+        $address_line1 = $_REQUEST['address_line1'];
+        $address_line2 = $_REQUEST['address_line2'];
+        $address_state = $_REQUEST['address_state'];
         $admission = $_REQUEST['Centac/Josaa'];
         $Gender = $_REQUEST['Gender'];
 		$Programme = $_REQUEST['prgm'];
-		$Department = $_REQUEST['dept'];
 		$Nationality = $_REQUEST['Nationality'];
 		$Other_Nation = $_REQUEST['Other_Nationality'];
 		$Community = $_REQUEST['caste'];
-		
-
 		$date = $_REQUEST['dob'];
 
 		echo("DOB = ". $date);
-		$State = $_REQUEST['State'];
-		$Other_State = $_REQUEST['Other_State'];
 		$Year_Of_Joining = $_REQUEST['year'];
 		$Type = $_REQUEST['type'];
-		$image = $_FILES['image']['name'];
-		// $target = "images/".basename($image);
 
+		// if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+		// 	$image = $_FILES['image']['name'];
+		// 	$target = "images/".basename($image);
+
+		// 	// generate a new name for the file using the application number
+		// 	$extension = pathinfo(basename($image), PATHINFO_EXTENSION);
+		// 	$new_name = $application_no . '.' . $extension;
+
+		// 	// set the target path for the uploaded file using the new name
+		// 	$target = "images/" . $new_name;
+
+		// } else {
+		// 	// handle the error
+		// 	echo "Error uploading file: " . $_FILES['image']['error'];
+		// }
 		
-		// generate a new name for the file using the application number
-		$extension = pathinfo(basename($image), PATHINFO_EXTENSION);
-		$new_name = $application_no . '.' . $extension;
-
-		// set the target path for the uploaded file using the new name
-		$target = "images/" . $new_name;
-
-		$sql = "INSERT INTO u_student (name, appn_num, centac_or_josaa, father_name, mother_name, DOB, GENDER, phone, EMAIL, address_line1, address_line2, address_state, nationality, community, type, programme, department, year_of_joining) VALUES (:name, :application_no, :admission, :father_name, :mother_name, :date, :Gender, :Contact, :email, :address_line1, :address_line2, :State, :Nationality, :Community, :Type, :Programme, :Department, :Year_Of_Joining)";
+		
+		
+		$sql = "INSERT INTO u_student (sname, appn_num, centac_or_josaa, father_name, mother_name, DOB, GENDER, phone, EMAIL, address_line1, address_line2, address_state, nationality, community, entry_mode, prgm_id, yoj) VALUES (:name, :application_no, :admission, :father_name, :mother_name, :date, :Gender, :Contact, :email, :address_line1, :address_line2, :State, :Nationality, :Community, :Type, :Programme, :Year_Of_Joining)";
 		$stmt = $conn->prepare($sql);
 
 		$params = array(
@@ -59,37 +64,37 @@
 			':email' => $email,
 			':address_line1' => $_POST['address_line1'],
 			':address_line2' => $_POST['address_line2'],
-			':State' => $State,
+			':State' => $address_state,
 			':Nationality' => $Nationality,
-			':Other_Nation' => $Other_Nation,
 			':Community' => $Community,
 			':Type' => $Type,
 			':Programme' => $Programme,
-			':Department' => $Department,
 			':Year_Of_Joining' => $Year_Of_Joining,
 		);
 
-		if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-			$msg = "Image uploaded successfully";
-		}else{
-			$msg = "Failed to upload image";
-		}
+		// if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+		// 	$msg = "Image uploaded successfully";
+		// }else{
+		// 	$msg = "Failed to upload image";
+		// }
 
-		echo $msg;
+		// echo $msg;
 		
 		if ($stmt->execute($params)) {
 			// Insert was successful
 			if ($stmt->rowCount() == 1) {
 				echo "Data stored in the database successfully.";
-				$sql = "SELECT name,application_no,admission,father_name,mother_name,date,gender,contact,email,address,nationality,other_nation,community,state,other_state,type,programme,department,specialization,year_of_joining FROM student where application_no='$application_no' ";	
-				$query=mysqli_query($conn,$sql);
-				foreach($query as $x)
+				$sql = "SELECT sname,appn_num,centac_or_josaa,father_name,mother_name,dob,gender,phone,email,address_line1, address_line2, address_state,nationality,community,entry_mode,prgm_id, yoj FROM u_student where appn_num='$application_no' ";	
+				$query = $conn -> query($sql);
+				$fetched_data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+				foreach($fetched_data as $x)
 				{
 					echo "<div id='makepdf'>
 					<table>
-					<tr><td>Name</td><td>".$x['name']."</td></tr>
-					<tr><td>Application number</td><td>".$x['application_no']."</td></tr>
-					<tr><td>Admission number</td><td>".$x['admission']."</td></tr>
+					<tr><td>Name</td><td>".$x['sname']."</td></tr>
+					<tr><td>Application number</td><td>".$x['appn_num']."</td></tr>
+					<tr><td>Admission number</td><td>".$x['centac_or_josaa']."</td></tr>
 					<tr><td>Father name</td><td>".$x['father_name']."</td></tr>
 					<tr><td>Mother name</td><td>".$x['mother_name']."</td></tr>
 					<tr><td>Date </td><td>".$x['date']."</td></tr>

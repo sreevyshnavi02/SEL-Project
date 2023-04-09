@@ -74,17 +74,7 @@
             <tr>
             <td>Year of Joining</td>
             <td>
-
-            <select name="year" id="joining">
-            <option value="-1">Year</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            </select>
+            <input type="text" name="year" id="joining">
             </td>
             </tr>
             <!---------------------- Gender ------------------------------------->
@@ -101,14 +91,14 @@
             <tr>
             <td>Mobile Number</td>
             <td>
-            <input type="text" name="MobileNumber" maxlength="10" placeholder="9870xxxxxx"/>
+            <input type="text" name="MobileNumber" maxlength="10" placeholder="Mobile Number"/>
             </td>
             </tr>
 
             <!-------------------------- Email ID ------------------------------------->
             <tr>
             <td>Email ID</td>
-            <td><input type="email" name="EmailID" maxlength="100" placeholder="name@gmail.com"/></td>
+            <td><input type="email" name="EmailID" maxlength="100" placeholder="Your email ID"/></td>
             </tr>
 
 
@@ -137,18 +127,27 @@
             <tr>
             <td>Nationality</td>
             <td>
-            <input type="radio" name="Nationality" value="Indian" />
-            Indian
-            <input type="radio" name="Nationality" value="Others" />
-            Others
+                <label>
+                <input type="radio" name="Nationality" value="Indian" checked> Indian
+                </label>
+                <label>
+                <input type="radio" name="Nationality" value="Others"> Others
+                </label>
+                <input type="text" name="Other_Nationality" maxlength="50" placeholder="Specify the Nationality" style="display: none;">
             </td>
             </tr>
-            <!---------------------------- Nationality-Others ----------------------------------->
-            <tr>
-            <td>If others specify</td>
-            <td><input type="text" name="Other_Nationality" maxlength="50"/>
-            </td>
-            </tr>
+
+            <script>
+                document.querySelector('input[name="Nationality"][value="Others"]').addEventListener('change', function() {
+                    var otherNationalityField = document.querySelector('input[name="Other_Nationality"]');
+                    if (this.checked) {
+                        otherNationalityField.style.display = 'block';
+                    } else {
+                        otherNationalityField.style.display = 'none';
+                    }
+                });
+            </script>
+
 
             <!---------------------------- Community ----------------------------------->
             <tr>
@@ -157,7 +156,7 @@
             <select name="caste" id="caste">
             <option value = "obc"> Other Backward Caste
             </option> 
-            <option value = "mbc"> Most Backword Caste
+            <option value = "mbc"> Most Backward Caste
             </option>
             <option value = "bc"> Backward Caste
             </option>
@@ -177,9 +176,9 @@
             <td>Method Of Study</td>
             <td> 
             <select name="type" id="regular">
-            <option value = "10"> Regular
+            <option value = "R"> Regular
             </option> 
-            <option value = "20"> Lateral Entry
+            <option value = "L"> Lateral Entry
             </option>
             </select>  
             </td>
@@ -189,36 +188,48 @@
             <!---------------------------- Programme ----------------------------------->
 
             <!-- fetching data from db -->
+            <?php
+            // prepare and execute the query to fetch program names
+            $stmt = $conn->prepare("SELECT prgm_id, prgm_name, dept_id FROM u_prgm");
+            $stmt->execute();
 
+            // fetch the results into an array
+            $prgms_offered = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $stmt = $conn->prepare("SELECT dept_id, dept_name FROM u_dept");
+            $stmt->execute();
+
+            // fetch the results into an array
+            $depts_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            ?>
             
 
             <tr>
             <td>Programme:</td>
             <td>
-            <select name="prgm" id="prgm">
-                <option value="" selected="selected">Select programme</option>
-            </select></td></tr>
-            <tr>
-            <td>Department: </td>
-            <td>
-            <select name="dept" id="dept">
-                <option value="" selected="selected">Select department</option>
-            </select></td></tr>           
+                <select name="prgm" id="prgm">
+                    <option value="" selected="selected">Select programme</option>
+                    <?php 
+                        foreach ($prgms_offered as $result) {
+                            echo "<option value='$result[prgm_id]'>".$result['dept_id']." - ".$result['prgm_name'] . "</option><br>";
+                        }
+                    ?>
+                </select>
+            </td>
             
             </tr>
             
             <!--------------------- Photo ------------------------------------------>
-            <tr>
+            <!-- <tr>
             <td>Passport size photo upload</td>
             <td><input type="file" name="image" id="fileToUpload" required>
-            <input type="submit" value="Upload Image" name="submit">
             </td>
-            </tr>
+            </tr> -->
 
 
             <!----------------------- Submit and Reset ------------------------------->
             <tr>
-            <td colspan="2" align="center">
+            <td>
             <div class="buttons-flex">
 
                 <input class="submit_option" type="reset" value="Reset">
