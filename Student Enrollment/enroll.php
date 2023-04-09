@@ -24,7 +24,7 @@
     <?php include '../header.php'; ?>
     <form action="enrolment_form_submit.php" method="post">
     <h1 class="main_heading"> STUDENT ENROLLMENT</h1>
-    <table cellpadding = "10" class="stud_enrollment_table">
+    <table class="stud_enrollment_table">
             <!--------------------- First Name ------------------------------------------>
             <tr>
             <td>Full Name (with Initials at back)</td>
@@ -35,7 +35,7 @@
             <!------------------------ Application number --------------------------------------->
             <tr>
             <td>Application number</td>
-            <td><input type="varchar" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)"/>
+            <td><input type="text" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)"/>
             <span id="txt"></span>
             </td>
             </tr>
@@ -229,7 +229,7 @@
 
             <!----------------------- Submit and Reset ------------------------------->
             <tr>
-            <td>
+            <td colspan = '2'>
             <div class="buttons-flex">
 
                 <input class="submit_option" type="reset" value="Reset">

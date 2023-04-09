@@ -29,7 +29,7 @@
                 // $fetch_email = mysqli_query($conn, "select ");
             ?>
             <!-- feature to send the otp securely -->
-            <input type="submit" value="Go to Student Page" class = "submit_login">
+            <input type="submit" value="Go to Student Page" class = "small_btn">
         </form>
     </div>
 

@@ -20,8 +20,7 @@
                     // header('Location: student_login.php');
             }
             else{
-                echo("Welcome ".$stud_name[0]['sname']."!");
-                echo("Dept: ".$stud_name[0]['dept_id']);
+                echo("<h2 class='stud_page_welcome'>Welcome ".$stud_name[0]['sname']."!</h2>");
                 $_SESSION['regno'] = $_POST['regno'];
                 $_SESSION['dept_id'] = $stud_name[0]['dept_id'];
         ?>

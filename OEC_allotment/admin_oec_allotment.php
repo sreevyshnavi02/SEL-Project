@@ -34,7 +34,7 @@
 
 <form action="admin_insert_oec.php" method="post">
     
-    <h1>OEC ALLOTMENT</h1>
+    <h1 style="text-align: center; padding: 1rem;">OEC ALLOTMENT</h1>
     <table id="OEC_table">
         <tr>
             <th>Course Code</th>
@@ -124,10 +124,12 @@
 
     <!-- add this data to the db -->
     
-    <button type="button" class = "btnn" onclick=add_new_row()>Add another OEC</button>
+    <button type="button" class = "small_btn" onclick=add_new_row()>Add another OEC</button>
     
-    <input type="submit" class = "btnn" value="Submit Data">
+    <input type="submit" class = "small_btn" value="Submit Data">
     </form>
+
+    <button onclick="<?php header('location: ') ?>"></button>
 
     <script>
         function add_new_row(){

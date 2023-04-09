@@ -105,7 +105,7 @@ table {
   padding: 0.5rem 2rem 0.5rem 2rem;
 }
 
-.submit_login,
+.small_btn,
 .submit_sess_exam_regn {
   background-color: rgb(72, 69, 69);
   color: white;
@@ -116,7 +116,7 @@ table {
   margin: 1rem auto 1rem auto;
 }
 
-.submit_login:hover,
+.small_btn:hover,
 .submit_sess_exam_regn:hover {
   background-color: rgb(229, 229, 217);
   color: black;
@@ -168,5 +168,38 @@ th,
 td {
   border: 1px solid black;
   padding: 0.5rem;
+  text-align: center;
+}
+
+.left-align-table td,
+.left-align-table th {
+  text-align: justify;
+}
+
+.stud_enrollment_table td {
+  /* border-radius: 25px; */
+  /* border: none; */
+  /* background-color: rgb(104, 170, 227); */
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.stud_enrollment_table {
+  border-collapse: collapse;
+}
+
+.stud_enrollment_table td input[type="text"],
+.stud_enrollment_table td select,
+.stud_enrollment_table td input[type="email"] {
+  width: 90%;
+  height: 100%;
+  padding: 5px;
+  background-color: rgb(233, 232, 232);
+  font-size: large;
+  border-radius: 25px;
+  border: none;
+}
+
+.stud_page_welcome {
   text-align: center;
 }
