@@ -18,7 +18,7 @@
     <?php 
         include '../header.php';
     ?>
-	<h1>Honor/Minor Pre-registration</h1>
+	<h1 style="text-align: center">Honor/Minor Pre-registration</h1>
 	<form method="POST" action="save_options.php">
     <?php
         $fetch_stud_details_sql = "select sname, curr_sem, credits_earned from u_student where regno = :regno";
@@ -31,36 +31,43 @@
 
     ?>
 
-        <div class="oec_option_div">
             <!-- display student details -->
-            <?php 
+            <table class="left-align-table">
+                <?php 
             foreach($fetched_stud_data as $stud_data){ 
-            ?>
-            <div class="oec_options">
-                <p>Name: <?php echo $stud_data['sname'] ?></p>
-                <p>Semester: <?php echo $stud_data['curr_sem'] ?></p>
-            <?php
+                ?>
+            <div class="hm_options">
+                <tr>
+                    <td>Name:</td> 
+                    <td><?php echo $stud_data['sname'] ?></td>
+                </tr>
+                <tr>
+                    <td>Semester: </td>
+                    <td><?php echo $stud_data['curr_sem'] ?></td>
+                </tr>
+                <?php
             }?>
 
-
-		<label for="cgpa">CGPA:</label>
-		<input type="number" name="cgpa" id="cgpa" step="0.01" min="0" max="10" required>
-        <br>
-		<label for="preference1">Preference 1:</label>
-		<select name="preference1" id="preference1" required>
-			<option value="">Select a Program</option>
+        <tr>
+            <td><label for="cgpa">CGPA:</label></td>
+            <td><input type="number" name="cgpa" id="cgpa" step="0.01" min="0" max="10" required></td>
+        </tr>
+        <tr>
+            <td><label for="preference1">Preference 1:</label></td>
+            <td><select name="preference1" id="preference1" required>
+            <option value="">Select a Program</option>
 			<?php
 				// Retrieve the list of courses from the database using PDO
                 $hm_prgms_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = :dept_id) OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != :dept_id) AND offered = 1";
 				$hm_prgms_prepare = $conn->prepare($hm_prgms_query);
                 $hm_prgms_prepare -> bindParam(':dept_id', $_SESSION['dept_id']);
-
+                
                 $hm_prgms_prepare -> execute();
-
+                
                 $hm_prgms = $hm_prgms_prepare -> fetchAll(PDO::FETCH_ASSOC);
                 echo "<script>console.log('fetched  prgms')</script>";
                 echo "<script>console.log('".count($hm_prgms)."')</script>";
-
+                
                 echo count($hm_prgms);
 				// Generate the options for the dropdown list
 				foreach($hm_prgms as $row){
@@ -68,47 +75,56 @@
                     echo "<script>console.log('".$row['PRGM_ID']."')</script>";
 					echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
 				}
-
-			?>
+                
+                ?>
 		</select>
-        <br>
-		<label for="preference2">Preference 2:</label>
-		<select name="preference2" id="preference2" required>
-			<option value="">Select a Program</option>
+        </td>
+        </tr>
+
+        <tr>
+
+            <td><label for="preference2">Preference 2:</label></td>
+            <td><select name="preference2" id="preference2" required>
+                <option value="">Select a Program</option>
 			<?php
 
-				// Retrieve the list of courses from the database using PDO
-                $courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
-				$courses_result = $conn->query($courses_query);
+// Retrieve the list of courses from the database using PDO
+$courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
+$courses_result = $conn->query($courses_query);
 
-				// Generate the options for the dropdown list
-				while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
+// Generate the options for the dropdown list
+while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
 					echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
                 }
-
-			?>
+                
+                ?>
 		</select>
-        <br>
-		<label for="preference3">Preference 3:</label>
-		<select name="preference3" id="preference3" required>
-			<option value="">Select a Program</option>
+        </td>
+    </tr>
+    <tr>
+        <td><label for="preference3">Preference 3:</label></td>
+		<td><select name="preference3" id="preference3" required>
+            <option value="">Select a Program</option>
 			<?php
 
-				// Retrieve the list of courses from the database using PDO
-                $courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
-				$courses_result = $conn->query($courses_query);
+// Retrieve the list of courses from the database using PDO
+$courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
+$courses_result = $conn->query($courses_query);
 
-				// Generate the options for the dropdown list
-				while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
-					echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
-                }
+// Generate the options for the dropdown list
+while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
+    echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
+}
 
-			?>
+?>
 		</select>
+        </td>
+    </tr>
         <br>
-
-		<input type="submit" value="Submit">
+        
+    </table>
+		<input type="submit" value="Submit" class="small_btn">
 	</form>
-
+    
 </body>
 </html>

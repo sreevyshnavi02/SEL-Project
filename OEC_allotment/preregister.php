@@ -30,10 +30,6 @@
             header('Location: oec_allotment_order.php');
         }
 
-        
-
-
-
         $stud_sem = $conn -> query ("select * from u_student where regno = '$regno';");
         $sem = $stud_sem -> fetchAll(PDO::FETCH_ASSOC);
         if($sem[0]['CURR_SEM'] >= 4 && $sem[0]['CURR_SEM'] <= 7){

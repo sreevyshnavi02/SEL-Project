@@ -46,7 +46,11 @@
         </tr>
         
         <?php 
-        // <!-- create a php array to store all the data -->
+            $fac_list_sql = "
+            select faculty_id, fname from u_faculty f 
+            where faculty_id != :fid;";
+            $fac_list_query = $conn -> prepare($fac_list_sql);
+            // <!-- create a php array to store all the data -->
             $oec_offered = array();
             
             // <!-- Retrieve the already added courses(if any) -->
@@ -77,10 +81,7 @@
                 <select name="data['.$row_count.'][]" id="fname">
                 <option value="'.$oec["faculty_id"].'">'.$oec["faculty_id"].' - '.$oec["fname"].'</option>';
 
-                $fac_list_sql = "
-                select faculty_id, fname from u_faculty f 
-                where faculty_id != :fid;";
-                $fac_list_query = $conn -> prepare($fac_list_sql);
+                
                 $fac_list_query -> bindParam(':fid', $oec['faculty_id']);
                 $fac_list_query -> execute();
 
@@ -145,11 +146,24 @@
             var cell3 = row.insertCell(2);
             cell3.innerHTML = "<input type = 'text' name='data[" + encodeURIComponent(count) + "][]'>";
             var cell4 = row.insertCell(3);
-            cell4.innerHTML = "<input type = 'text' name='data[" + encodeURIComponent(count) + "][]'>";
+            cell4.innerHTML = "<select name='data[" + encodeURIComponent(count) + "][]'>";
+                // <option value="'.$oec["faculty_id"].'">'.$oec["faculty_id"].' - '.$oec["fname"].'</option>';
+                
+                // $fac_list_query -> bindParam(':fid', $oec['faculty_id']);
+                // $fac_list_query -> execute();
+
+                // $fac_list = $fac_list_query -> fetchAll(PDO::FETCH_ASSOC);
+
+                // foreach($fac_list as $fac_list_row){
+                //     echo'
+                //     <option value="'.$fac_list_row["faculty_id"].'">'.$fac_list_row["faculty_id"].' - '.$fac_list_row["fname"].'</option>
+                //     </select>
+                //     </td>';
+                // }
             var cell5 = row.insertCell(4);
-            cell5.innerHTML = "<input type = 'text' name='data[" + encodeURIComponent(count) + "][]'>";
+            cell5.innerHTML = "<input type = 'number' name='data[" + encodeURIComponent(count) + "][]'>";
             var cell6 = row.insertCell(5);
-            cell6.innerHTML = "<input type = 'text' name='data[" + encodeURIComponent(count) + "][]'>";
+            cell6.innerHTML = "<input type = 'number' name='data[" + encodeURIComponent(count) + "][]'>";
             count++;
         }
 
