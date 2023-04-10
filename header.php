@@ -15,7 +15,7 @@
             <img src="images/logo_ptu.png" alt="PTU logo" onerror=this.src="../images/logo_ptu.png">
         </div>
         <div class="univ_name">
-            <h1 class= 'heading'>PUDUCHERRY TECHNOLOGICAL UNIVERSITY<br>Office of Controller of Examinations</h1>
+            <h1 class= 'heading'>PUDUCHERRY TECHNOLOGICAL UNIVERSITY<br><br>Office of Controller of Examinations</h1>
         </div>
     </div>
 </body>

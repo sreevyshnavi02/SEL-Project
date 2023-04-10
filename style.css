@@ -5,10 +5,10 @@
 }
 
 .header {
-  background-color: rgb(250, 248, 248);
-  color: brown;
+  background-color: rgb(62, 86, 98);
+  color: white;
   text-align: center;
-  padding: 0.2rem;
+  padding: 2rem;
   margin: 0 0 2rem 0;
   display: flex;
 }
@@ -21,11 +21,11 @@ table {
 .univ_name {
   margin: 1rem;
   text-align: center;
-  width: 95%;
+  width: 90%;
 }
 
 .logo > img {
-  width: 70%;
+  width: 100%;
   height: auto;
 }
 
