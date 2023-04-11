@@ -39,7 +39,7 @@
             <a href = './Honor_minor_allotment/options.php'><button class = 'btnn'>Pre-Registration for Honor/Minor</button></a>
             
             <!-- show this btn only when the admin enables it and disable it after the deadline -->
-            <a href = #><button class = 'btnn'>Course Registration</button></a>
+            <a href = './course_regn/course_regn.php'><button class = 'btnn'>Course Registration</button></a>
             
             <!-- show this btn only when the admin enables it and disable it after the deadline -->
             <a href="exam_regn/stu_page.php"><button class = 'btnn'>Exam Registration</button></a>
