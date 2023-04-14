@@ -42,7 +42,7 @@
             <a href = './course_regn/course_regn.php'><button class = 'btnn'>Course Registration</button></a>
             
             <!-- show this btn only when the admin enables it and disable it after the deadline -->
-            <a href="exam_regn/stu_page.php"><button class = 'btnn'>Exam Registration</button></a>
+            <a href="exam_regn/stud_get_session.php"><button class = 'btnn'>Exam Registration</button></a>
         </div>
 
         <?php

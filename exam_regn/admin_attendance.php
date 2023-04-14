@@ -10,46 +10,65 @@
 <body>
     <?php
         include '../header.php';
-        if(isset($_POST['submit_session'])){
-            $_SESSION['session'] = $_POST['session'];
-            $regno_q = "SELECT  distinct regno from u_course_regn where session = '$_SESSION[session]';";
-            $regno = mysqli_query($conn, $regno_q);
-            foreach($regno as $r)
-            {
-                $attendance_query = "SELECT session, round(avg(attendance)) as consolidated_attendance from u_course_regn where regno='$r[regno]'";
-                $con_attendance = mysqli_query($conn, $attendance_query);
-                $data_fetch = mysqli_fetch_assoc($con_attendance);
-                
-                if($data_fetch['consolidated_attendance'] >= 75){
-                    $eligible = 1;
-                }
-                else{
-                    $eligible = 0;
-                }
-                
-                //sql query to check for dupliactes
-                $inserted_rows = mysqli_query($conn, "select * from u_exam_regn where regno = '$r[regno]' and session = '$data_fetch[session]'");
-                //if there is no entry yet - to avoid duplicate entry error
-                if(mysqli_num_rows($inserted_rows) == 0){
-                    $att_entry_query = "INSERT into u_exam_regn(regno,session,consolidated_attendance, eligible_for_exam) values('$r[regno]','$data_fetch[session]','$data_fetch[consolidated_attendance]', '$eligible')";
-                    $att_entry = mysqli_query($conn, $att_entry_query);
-                }
-                // if($att_entry)
-                // {
-                    //     echo "<br>Success";
-                    // }
-                    // else
-                    // {
-                        //     echo "Error";
-                        // }
+
+        // getting the session chosen by the user
+        $year =  $_POST['session_year'];
+        $formatted_year = $year[strlen($year) - 2].$year[strlen($year) - 1];
+        $_SESSION['chosen_session'] = $formatted_year.$_POST['session_month'];
+        
+        //selecting all the students who have registered for various courses during the session        
+        $regno_sql = "SELECT  distinct regno from u_course_regn where session = :sess;";
+        $registered_students = $conn -> prepare($regno_sql);
+        $registered_students -> bindParam(':sess', $_SESSION['chosen_session']);
+        $registered_students -> execute();
+
+        //to fetch the results
+        $registered_students = $registered_students -> fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($registered_students as $r)
+        {
+            echo $r['regno'];
+            $attendance_query = "SELECT session, round(avg(attendance)) as consolidated_attendance from u_course_regn where regno=:regno";
+            $con_attendance = $conn -> prepare($attendance_query);
+            $con_attendance -> bindParam(':regno', $r['regno']);
+            $con_attendance -> execute();
+
+            //to fetch the results
+            $con_attendance = $con_attendance -> fetchAll(PDO::FETCH_ASSOC);
+            
+            if($con_attendance['consolidated_attendance'] >= 75){
+                $eligible = 1;
+            }
+            else{
+                $eligible = 0;
+            }
+            
+            //sql query to check for dupliactes
+            $inserted_rows = $conn -> query("select * from u_exam_regn where regno = '$r[regno]' and session = '$data_fetch[session]'");
+            $n = $inserted_rows -> rowCount();
+            //if there is no entry yet - to avoid duplicate entry error
+            if($n == 0){
+                $insert_sql = "INSERT into u_exam_regn(regno,session,consolidated_attendance, eligible_for_exam) values(:regno, :sess, :consolidated_attendace, :eligible)";
+                $insert_sql_prepare = $conn -> prepare($insert_sql);
+                $insert_oec = $insert_sql_prepare -> execute(
+                    [
+                        ':regno' => $r['regno'],
+                        ':sess' => $_SESSION['chosen_session'],
+                        ':consolidated_attendace' => $con_attendance['consolidated_attendance'],
+                        ':eligible' => $eligible
+                    ]);
             }
         }
+        
         //display the consolidated attendance 
         // regno, name, attendance percentage, eligible or not
         $display_att_query = "select e.regno, s.sname, e.consolidated_attendance, e.eligible_for_exam 
         from u_student s, u_exam_regn e 
-        where s.regno = e.regno;";
-        $display_att_run = mysqli_query($conn, $display_att_query);
+        where s.regno = e.regno and e.session = :sess;";
+        $display_att_run = $conn -> prepare($display_att_query);
+        $display_att_run -> bindParam(':sess', $_SESSION['chosen_session']);
+        $display_att_run -> execute();
+        $display_att_run = $display_att_run -> fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <div id="makepdf">

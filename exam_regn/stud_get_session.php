@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php include '../header.php' ?>
-    <form action="admin_attendance.php" method="post" class = "get_session_form">  
+    <form action="exam_reg.php" method="post" class = "get_session_form">  
         <!-- Session as input -->
         <div class="input_session">
             <div class="label_session">

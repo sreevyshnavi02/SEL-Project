@@ -1,17 +1,5 @@
 <?php
-// Database connection
-$dsn = 'mysql:host=localhost;dbname=database_name';
-$username = 'username';
-$password = 'password';
-$options = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-);
-try {
-    $conn = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-}
-
+include '../header.php';
 // Get the current year for the first two digits of the register number
 $currentYear = date("y");
 

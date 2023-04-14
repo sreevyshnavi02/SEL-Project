@@ -1,7 +1,3 @@
-<?php
-    include '../connection.php';
-?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,69 +6,86 @@
     </head>
     <body>
     <?php
-            // include 'fetch_data.php';
-            // // include 'chk_eligibility.php'
+        include '../connection.php';
 
-            // $_SESSION['regno'] = $_POST['regno'];
-            $_SESSION['session'] = $_POST['session'];
-            //fetching the details of the student based on regno
-            $data_fetch_query = mysqli_query($conn, "select s.sname, p.prgm_name, d.dept_name from u_student s, u_prgm p, u_dept d
-            where s.regno = '$_SESSION[regno]' and p.prgm_id = s.prgm_id and d.dept_id = p.dept_id");
+        // getting the session chosen by the user
+        $year =  $_POST['session_year'];
+        $formatted_year = $year[strlen($year) - 2].$year[strlen($year) - 1];
+        $_SESSION['chosen_session'] = $formatted_year.$_POST['session_month'];
+        
+        //fetching the details of the student based on regno
+        $stmt = $conn->prepare("SELECT s.sname, p.prgm_name, d.dept_name 
+            FROM u_student s 
+            INNER JOIN u_prgm p ON p.prgm_id = s.prgm_id 
+            INNER JOIN u_dept d ON d.dept_id = p.dept_id 
+            WHERE s.regno = :regno");
+        $stmt->bindParam(':regno', $_SESSION['regno']);
+        $stmt->execute();
+        $stud_details = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            $fetched_data = mysqli_fetch_assoc($data_fetch_query);
-            $name = $fetched_data['sname'];
-            $prgm_name = $fetched_data['prgm_name'];
-            $dept_name = $fetched_data['dept_name'];
+        $name = $stud_details['sname'];
+        $prgm_name = $stud_details['prgm_name'];
+        $dept_name = $stud_details['dept_name'];
 
-            //query to get the consolidated attendance of the student
-            $attendance_q = "SELECT consolidated_attendance 
-            from u_exam_regn where regno='$_SESSION[regno]' 
-            and session = '$_SESSION[session]'";
-
-            $attendance_r = mysqli_query($conn, $attendance_q);
-            $attendance = mysqli_fetch_assoc($attendance_r);
+        //query to get the consolidated attendance of the student
+        $attendance_q = $conn -> prepare("SELECT consolidated_attendance 
+        from u_exam_regn where regno=:regno 
+        and session = :sess");
+        $attendance_q -> bindParam(':regno', $_SESSION['regno']);
+        $attendance_q -> bindParam(':sess', $_SESSION['chosen_session']);
+        $attendance_q -> execute();
+        
+        if ($attendance = $attendance_q->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['consolidated_attendance'] = $attendance['consolidated_attendance'];
+        } else {
+            // handle case where query did not return any rows
+            echo "no rows returned";
+        }
 
-            $subjectquery = "SELECT u_course_regn.course_code,u_course_regn.sem,session,course_name,course_type 
-                            from u_course_regn 
-                            inner join u_course 
-                            on u_course_regn.course_code=u_course.course_code 
-                            where regno='$_SESSION[regno]' and session = '$_SESSION[session]'"; 
-            $registered_courses = mysqli_query($conn, $subjectquery);   
+        
+        $subjectquery = $conn -> prepare("SELECT u_course_regn.course_code,u_course_regn.sem,session,course_name,course_type 
+                        from u_course_regn 
+                        inner join u_course 
+                        on u_course_regn.course_code=u_course.course_code 
+                        where regno= :regno and session = :sess"); 
+        $subjectquery -> bindParam(':regno', $_SESSION['regno']);
+        $subjectquery -> bindParam(':sess', $_SESSION['chosen_session']);
+        $subjectquery -> execute();
+        
+        $registered_courses = $subjectquery -> fetchAll(PDO::FETCH_ASSOC);   
 
+        //query to bring in all the history of arrears for that student
+        $arrear_q = $conn -> prepare("SELECT regno, course_code, session from u_external_marks
+        where regno=:regno and grade in ('F','Z')");
+        $arrear_q -> bindParam(':regno', $_SESSION['regno']);
+        $arrear_q -> execute();
 
+        $arrear_courses = $arrear_q -> fetchAll(PDO::FETCH_ASSOC);
 
-            //query to bring in all the history of arrears for that student
-            $arrear_q = "SELECT regno, course_code, session from u_external_marks
-            where regno='$_SESSION[regno]' and grade in ('F','Z')";
+        $arrears_array = array();
+        
+        foreach($arrear_courses as $arrear)
+        {
+            //pushing all the arrear history into arrears_array 
+            array_push(
+                $arrears_array, 
+                array($arrear['regno'],$arrear['course_code'], $arrear['session'])
+            );
+        }
 
-            $arrear_courses = mysqli_query($conn, $arrear_q);
-
-            $arrears_array = array();
-            
-            foreach($arrear_courses as $arrear)
-            {
-                //pushing all the arrear history into arrears_array 
-                array_push(
-                    $arrears_array, 
-                    array($arrear['regno'],$arrear['course_code'], $arrear['session'])
-                );
+        foreach ($arrears_array as $i => $row) {
+            $a_query = $conn -> prepare("SELECT * from u_external_marks 
+                where regno='$row[0]' 
+                and grade not in ('F','Z') 
+                and course_code='$row[1]'");
+            $a_query -> execute();
+            $n = $a -> rowCount();
+            if($n>0){
+                unset($arrears_array[$i]);
             }
+        }
 
-            foreach ($arrears_array as $i => $row) {
-                $a_query = "SELECT * from u_external_marks 
-                    where regno='$row[0]' 
-                    and grade not in ('F','Z') 
-                    and course_code='$row[1]' ";
-
-                $a = mysqli_query($conn,$a_query);
-                $x=mysqli_num_rows($a);
-                if($x>0){
-                    unset($arrears_array[$i]);
-                }
-            }
-
-            $_SESSION['current_backlogs'] = $arrears_array;
+        $_SESSION['current_backlogs'] = $arrears_array;
     ?>
     
     <div class='img'>
@@ -82,7 +95,7 @@
         <h1>Puducherry Technological University<br>(PTU)</h1>
     </div>
     <div class='Details'>
-        <h2><b>Examination Wing</b><br><?php echo "$_SESSION[session]" ?></h2>
+        <h2><b>Examination Wing</b><br><?php echo "$_SESSION[chosen_session]" ?></h2>
         <p>To<br>
         <b><?php echo "$name" ?></b>,<br>
         Register Nr:<?php echo $_SESSION['regno'] ?> <br>
