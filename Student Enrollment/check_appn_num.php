@@ -11,7 +11,7 @@ if(strlen($application_no) != 0){
     $stmt->execute();
 
     if($stmt->rowCount() > 0) {
-        echo("Application number already exists");
+        echo("Application number already exists!");
     }
 }
 ?>

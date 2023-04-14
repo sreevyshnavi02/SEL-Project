@@ -11,7 +11,7 @@
     
 
 <?php
-    include '../connection.php';
+    include '../header.php';
     $sql = "SELECT sname,appn_num,centac_or_josaa,father_name,mother_name,dob,gender,phone,personal_email,address_line1, address_line2, address_state,nationality,community,entry_mode, yoj, p.prgm_name, d.dept_name
     FROM u_student s, u_prgm p, u_dept d 
     where appn_num='$_SESSION[application_no]' 

@@ -203,3 +203,9 @@ td {
 .stud_page_welcome {
   text-align: center;
 }
+
+#txt {
+  color: red;
+  font-size: large;
+  font-weight: 700;
+}
