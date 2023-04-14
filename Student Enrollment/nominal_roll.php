@@ -4,7 +4,7 @@ $yoj = $_POST['yoj'];
 $prgm_id = $_POST['prgm_id'];
 
 // Prepare the query
-$stmt = $pdo->prepare("SELECT regno, sname, dob FROM u_student WHERE yoj = :yoj AND prgm_id = :prgm_id ORDER BY sname, dob");
+$stmt = $pdo->prepare("SELECT regno, sname, dob, email FROM u_student WHERE yoj = :yoj AND prgm_id = :prgm_id ORDER BY sname, dob");
 
 // Bind parameters and execute the query
 $stmt->bindParam(':yoj', $yoj);
@@ -18,7 +18,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo "<table>";
 echo "<tr><th>Reg No.</th><th>Name</th><th>DOB</th></tr>";
 foreach ($results as $row) {
-    echo "<tr><td>{$row['regno']}</td><td>{$row['sname']}</td><td>{$row['dob']}</td></tr>";
+    echo "<tr><td>{$row['regno']}</td><td>{$row['sname']}</td><td>{$row['dob']}</td><td>{$row['email']}</td></tr>";
 }
 echo "</table>";
 
