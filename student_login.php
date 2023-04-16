@@ -19,10 +19,10 @@
             </div>
             <input type="text" name="regno" id="regno">
 
-            <div class="label_OTP">
+            <!-- <div class="label_OTP">
                 <label for="otp">Enter the OTP: </label>
             </div>
-            <input type="text" name="otp" id="otp">
+            <input type="text" name="otp" id="otp"> -->
 
             <!-- fetch email id associated with the given regno -->
             <?php 
