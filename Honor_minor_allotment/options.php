@@ -161,7 +161,7 @@
     <?php
     }
     else{
-        echo "<h1 style='text-align:center'>You aren't eligible for OEC Registration!</h1>";
+        echo "<h1 style='text-align:center'>You aren't eligible for Honor/Minor Programmes!</h1>";
     }
     ?>
     
