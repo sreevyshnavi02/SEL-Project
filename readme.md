@@ -9,7 +9,7 @@ Tasks Involved:
 - **Module 2: Allotment of Honor/Minor programmes based on merit and choices given by students**
 
 - [x] T4: Get 3 options for Honor/Minor programmes from eligible students
-- [ ] T5: Allotment based on options given and CGPA
+- [x] T5: Allotment based on options given and CGPA
 - [ ] T6: Provision for admin to allow dropping of the programmes
 
 - **Module 3: Timestamp-based allotment of Open Elective Courses**
