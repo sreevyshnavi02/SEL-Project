@@ -4,7 +4,7 @@ Tasks Involved:
 
 - [x] T1: Get the student’s details & store in database
 - [x] T2: Register number generation
-- [ ] T3: Institution email ID generation
+- [x] T3: Institution email ID generation
 
 - **Module 2: Allotment of Honor/Minor programmes based on merit and choices given by students**
 
