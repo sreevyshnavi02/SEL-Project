@@ -1,5 +1,6 @@
 <?php
 include '../header.php';
+    
 // Check if a minimum of 10 students opt for a program as the first choice
     $opt_count_query = "SELECT COUNT(REGNO) AS opt_count, OPT1_PRGM_ID 
                         FROM u_hm_preregistration 
@@ -11,21 +12,30 @@ include '../header.php';
     // Get the list of programs with at least 10 eligible students
     $eligible_programs = array();
     while ($row = $opt_count_result->fetch(PDO::FETCH_ASSOC)) {
-    $eligible_programs[] = $row["OPT1_PRGM_ID"];
+        $eligible_programs[] = $row["OPT1_PRGM_ID"];
     }
 
     // Allot programs to eligible students
     $allotment_query = "INSERT INTO u_hm_allotment (regno, alloted_prgm, allotment_date) 
-                        SELECT regno, opt1_prgm_id, CURRENT_DATE() 
-                        FROM ( 
-                        SELECT REGNO, OPT1_PRGM_ID, CGPA 
+                        SELECT regno, alloted_prgm, CURRENT_DATE() 
+                        FROM (
+                        SELECT REGNO, 
+                                CASE 
+                                WHEN opt1_prgm_id IN (" . implode(',', $eligible_programs) . ") THEN opt1_prgm_id 
+                                WHEN opt2_prgm_id IN (" . implode(',', $eligible_programs) . ") THEN opt2_prgm_id 
+                                WHEN opt3_prgm_id IN (" . implode(',', $eligible_programs) . ") THEN opt3_prgm_id 
+                                END AS alloted_prgm, 
+                                CGPA 
                         FROM u_hm_preregistration 
-                        WHERE OPT1_PRGM_ID IN (" . implode(',', $eligible_programs) . ") AND CGPA > 7.5 
+                        WHERE (opt1_prgm_id IN (" . implode(',', $eligible_programs) . ") 
+                                OR opt2_prgm_id IN (" . implode(',', $eligible_programs) . ") 
+                                OR opt3_prgm_id IN (" . implode(',', $eligible_programs) . ")) 
+                                AND CGPA > 7.5 
                         ORDER BY CGPA DESC 
                         LIMIT 40
                         ) AS eligible_students;";
     $conn->query($allotment_query);
 
-    // Close the database connection
+    header('admin_post_allotment.php');
 
 ?>
