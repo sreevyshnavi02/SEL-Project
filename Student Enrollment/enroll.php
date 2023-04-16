@@ -28,14 +28,14 @@
             <!--------------------- First Name ------------------------------------------>
             <tr>
             <td>Full Name (with Initials at back)</td>
-            <td><input type="text" name="Name" maxlength="100"  />
+            <td><input type="text" name="Name" maxlength="100" required />
             </td>
             </tr>
 
             <!------------------------ Application number --------------------------------------->
             <tr>
             <td>Application number</td>
-            <td><input type="text" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)"/>
+            <td><input type="text" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)" required/>
             <span id="txt"></span>
             </td>
             </tr>
@@ -43,30 +43,30 @@
             <tr>
             <td>Centac/Josaa</td>
             <td>
-            <input type="radio" name="Centac/Josaa" value="Centac" />
+            <input type="radio" name="Centac/Josaa" value="Centac" required />
             Centac
-            <input type="radio" name="Centac/Josaa" value="Josaa" />
+            <input type="radio" name="Centac/Josaa" value="Josaa" required />
             Josaa
             </td>
             </tr>
             <!--------------------- Father's Name ------------------------------------------>
             <tr>
             <td>Father's Name</td>
-            <td><input type="text" name="Father_name" maxlength="50"  />
+            <td><input type="text" name="Father_name" maxlength="50" required />
 
             </td>
             </tr>
             <!--------------------- Mother's Name ------------------------------------------>
             <tr>
             <td>Mother's Name</td>
-            <td><input type="text" name="Mother_name" maxlength="50"  />
+            <td><input type="text" name="Mother_name" maxlength="50" required />
 
             </td>
             </tr>
             <!--------------------------Date Of Birth----------------------------------->
             <tr>
             <td>Date of Birth</td>
-            <td><input type="date" name="dob" id="dob">
+            <td><input type="date" name="dob" id="dob" required>
             </td>
             </tr>
 
@@ -74,16 +74,16 @@
             <tr>
             <td>Year of Joining</td>
             <td>
-            <input type="text" name="year" id="joining">
+            <input type="text" name="year" id="joining" required>
             </td>
             </tr>
             <!---------------------- Gender ------------------------------------->
             <tr>
             <td>Gender</td>
             <td>
-            <input type="radio" name="Gender" value="Male" />
+            <input type="radio" name="Gender" value="Male" required/>
             Male
-            <input type="radio" name="Gender" value="Female" />
+            <input type="radio" name="Gender" value="Female" required/>
             Female
             </td>
             </tr>
@@ -91,14 +91,14 @@
             <tr>
             <td>Mobile Number</td>
             <td>
-            <input type="text" name="MobileNumber" maxlength="10" placeholder="Mobile Number"/>
+            <input type="text" name="MobileNumber" maxlength="10" placeholder="Mobile Number" required/>
             </td>
             </tr>
 
             <!-------------------------- Email ID ------------------------------------->
             <tr>
             <td>Email ID</td>
-            <td><input type="email" name="EmailID" maxlength="100" placeholder="Your email ID"/></td>
+            <td><input type="email" name="EmailID" maxlength="100" placeholder="Your email ID" required/></td>
             </tr>
 
 
@@ -106,19 +106,19 @@
             <tr>
             <td>Address Line 1</td>
             <td>
-                <input type="text" name="address_line1" />
+                <input type="text" name="address_line1" required/>
             </td>
             </tr>
             <tr>
             <td>Address Line 2</td>
             <td>
-                <input type="text" name="address_line2" />
+                <input type="text" name="address_line2" required/>
             </td>
             </tr>
             <tr>
             <td>State</td>
             <td>
-                <input type="text" name="address_state" />
+                <input type="text" name="address_state" required/>
             </td>
             </tr>
 
@@ -128,10 +128,10 @@
             <td>Nationality</td>
             <td>
                 <label>
-                <input type="radio" name="Nationality" value="Indian" checked> Indian
+                <input type="radio" name="Nationality" value="Indian" checked required> Indian
                 </label>
                 <label>
-                <input type="radio" name="Nationality" value="Others"> Others
+                <input type="radio" name="Nationality" value="Others" required> Others
                 </label>
                 <input type="text" name="Other_Nationality" maxlength="50" placeholder="Specify the Nationality" style="display: none;">
             </td>
@@ -153,7 +153,7 @@
             <tr>
             <td>Community</td>
             <td> 
-            <select name="caste" id="caste">
+            <select name="caste" id="caste" required>
             <option value = "obc"> Other Backward Caste
             </option> 
             <option value = "mbc"> Most Backward Caste
@@ -175,7 +175,7 @@
             <tr>
             <td>Method Of Study</td>
             <td> 
-            <select name="type" id="regular">
+            <select name="type" id="regular" required>
             <option value = "R"> Regular
             </option> 
             <option value = "L"> Lateral Entry
@@ -207,7 +207,7 @@
             <tr>
             <td>Programme:</td>
             <td>
-                <select name="prgm" id="prgm">
+                <select name="prgm" id="prgm" required>
                     <option value="" selected="selected">Select programme</option>
                     <?php 
                         foreach ($prgms_offered as $result) {
@@ -217,6 +217,12 @@
                 </select>
             </td>
             
+            </tr>
+            <tr>
+                <td colspan='2'>
+                    <input type="checkbox" name="confirm" id="confirm" required>
+                    <label for="confirm">I hereby confirm that I have checked the data entered and it is correct to the best of my knowledge.</label>
+                </td>
             </tr>
             
             <!--------------------- Photo ------------------------------------------>
