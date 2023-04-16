@@ -7,7 +7,14 @@
     <title>PTU-COE</title>
 </head>
 <body>
-    <?php include '../header.php' ?>
+    <?php 
+        include '../header.php';
+        $regno = $_SESSION['regno'];
+        $stud_sem = $conn -> query ("select * from u_student where regno = '$regno';");
+        $sem = $stud_sem -> fetchAll(PDO::FETCH_ASSOC);
+        if($sem[0]['CURR_SEM'] >= 4 && $sem[0]['CURR_SEM'] <= 7){
+    ?>
+        
     <form action="preregister.php" method="post" class = "get_session_form">  
         <!-- Session as input -->
         <div class="input_session">
@@ -31,5 +38,11 @@
         
         <input type="submit" value="Proceed" name="submit_session" class = "submit_session">
     </form>
+    <?php
+    }
+    else{
+        echo "<h1 style='text-align:center'>You aren't eligible for OEC Registration!</h1>";
+    }
+    ?>
 </body>
 </html>
