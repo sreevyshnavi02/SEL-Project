@@ -9,7 +9,7 @@
 <body>
     <?php include '../header.php'; 
     // Get the values submitted by the form
-    $cgpa = $_POST['cgpa'];
+    $cgpa = $_SESSION['cgpa'];
     $preference1 = $_POST['preference1'];
     $preference2 = $_POST['preference2'];
     $preference3 = $_POST['preference3'];
@@ -29,10 +29,20 @@
     
     // Execute the insert statement
     $insert_prepare->execute();
-    // echo "<script>alert('Your options were saved!')</script>";
-    echo "<h1>Your options were saved!</h1>";
-        
+    echo "<h3 style='text-align: center;'>Your options are saved!</h3>";
+    // sleep(10);
+    // header("Location: ../student_login.php");
     ?>
+
+<button class="small_btn" onclick="goback()">Back</button>
+
+<script>
+    function goback() {
+        window.location.href = "../student_login.php";
+    }
+</script>
+
+
     
 </body>
 </html>

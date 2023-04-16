@@ -17,6 +17,42 @@
     must be disabled until the first 2 options are chosen -->
     <?php 
         include '../header.php';
+        $regno = $_SESSION['regno'];
+        $stud_details = $conn -> query ("
+        select s.regno, s.curr_sem, s.entry_mode, c.cgpa, c.sem, p.dept_id
+        from u_student s, u_gpa_cgpa c, u_prgm p
+        where s.regno = '$regno' 
+        and s.regno=c.regno 
+        and s.curr_sem = c.sem 
+        and s.prgm_id = p.prgm_id;");
+
+        $stud_details = $stud_details -> fetch(PDO::FETCH_ASSOC);
+
+        $_SESSION['dept_id'] = $stud_details['dept_id'];
+        $_SESSION['cgpa'] = $stud_details['cgpa'];
+
+        $check_prereg = $conn -> query ("
+        select * from u_hm_preregistration
+        where regno = '$regno' ");
+
+        $n = $check_prereg -> rowCount();
+
+        //displaying the cgpa
+        if($n > 0){
+            echo "<h1 style='text-align: center; background-color: gray; padding: 1rem'>You have already given the options. </h1><br>";   
+        ?>
+            <button class="small_btn" onclick="goback()">Back</button>
+
+            <script>
+                function goback() {
+                    window.location.href = "../student_login.php";
+                }
+            </script> 
+        <?php
+        }
+        elseif(($stud_details['curr_sem'] == 3 && $stud_details['entry_mode'] == 'R' && $stud_details['cgpa'] > 7) ||
+        ($stud_details['curr_sem'] == 4 && $stud_details['entry_mode'] == 'L' && $stud_details['cgpa'] > 7)){
+            echo "<h1 style='text-align: center; background-color: gray; padding: 1rem'>Your CGPA: ".$stud_details['cgpa']."</h1><br>";
     ?>
 	<h1 style="text-align: center">Honor/Minor Pre-registration</h1>
 	<form method="POST" action="save_options.php">
@@ -49,26 +85,21 @@
             }?>
 
         <tr>
-            <td><label for="cgpa">CGPA:</label></td>
-            <td><input type="number" name="cgpa" id="cgpa" step="0.01" min="0" max="10" required></td>
-        </tr>
-        <tr>
-            <td><label for="preference1">Preference 1:</label></td>
-            <td><select name="preference1" id="preference1" required>
-            <option value="">Select a Program</option>
-			<?php
+            <?php
 				// Retrieve the list of courses from the database using PDO
-                $hm_prgms_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = :dept_id) OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != :dept_id) AND offered = 1";
+                $dept_id = $_SESSION['dept_id'];
+                $hm_prgms_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$dept_id') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$dept_id') AND offered = 1";
 				$hm_prgms_prepare = $conn->prepare($hm_prgms_query);
-                $hm_prgms_prepare -> bindParam(':dept_id', $_SESSION['dept_id']);
+                // $hm_prgms_prepare -> bindParam(':dept_id', $dept_id);
                 
                 $hm_prgms_prepare -> execute();
                 
                 $hm_prgms = $hm_prgms_prepare -> fetchAll(PDO::FETCH_ASSOC);
-                echo "<script>console.log('fetched  prgms')</script>";
-                echo "<script>console.log('".count($hm_prgms)."')</script>";
-                
-                echo count($hm_prgms);
+            ?>
+            <td><label for="preference1">Preference 1:</label></td>
+            <td><select name="preference1" id="preference1" required>
+            <option value="">Select a Program</option>
+			<?php
 				// Generate the options for the dropdown list
 				foreach($hm_prgms as $row){
                     echo "<script>console.log('inside while')</script>";
@@ -88,12 +119,12 @@
                 <option value="">Select a Program</option>
 			<?php
 
-// Retrieve the list of courses from the database using PDO
-$courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
-$courses_result = $conn->query($courses_query);
+                // Retrieve the list of courses from the database using PDO
+                $courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
+                $courses_result = $conn->query($courses_query);
 
-// Generate the options for the dropdown list
-while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
+                // Generate the options for the dropdown list
+                while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
 					echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
                 }
                 
@@ -103,21 +134,22 @@ while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
     </tr>
     <tr>
         <td><label for="preference3">Preference 3:</label></td>
-		<td><select name="preference3" id="preference3" required>
+		<td>
+            <select name="preference3" id="preference3" required>
             <option value="">Select a Program</option>
 			<?php
 
-// Retrieve the list of courses from the database using PDO
-$courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
-$courses_result = $conn->query($courses_query);
+                // Retrieve the list of courses from the database using PDO
+                $courses_query = "SELECT * FROM u_prgm WHERE (LOWER(prgm_name) LIKE '%honors%' AND dept_id = '$_SESSION[dept_id]') OR (LOWER(prgm_name) LIKE '%minors%' AND dept_id != '$_SESSION[dept_id]') AND offered = 1";
+                $courses_result = $conn->query($courses_query);
 
-// Generate the options for the dropdown list
-while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
-    echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
-}
+                // Generate the options for the dropdown list
+                while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
+                }
 
-?>
-		</select>
+            ?>
+            </select>
         </td>
     </tr>
         <br>
@@ -125,6 +157,13 @@ while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
     </table>
 		<input type="submit" value="Submit" class="small_btn">
 	</form>
+
+    <?php
+    }
+    else{
+        echo "<h1 style='text-align:center'>You aren't eligible for OEC Registration!</h1>";
+    }
+    ?>
     
 </body>
 </html>
