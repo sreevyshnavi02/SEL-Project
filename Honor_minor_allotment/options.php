@@ -50,8 +50,8 @@
             </script> 
         <?php
         }
-        elseif(($stud_details['curr_sem'] == 3 && $stud_details['entry_mode'] == 'R' && $stud_details['cgpa'] > 7) ||
-        ($stud_details['curr_sem'] == 4 && $stud_details['entry_mode'] == 'L' && $stud_details['cgpa'] > 7)){
+        elseif(($stud_details['curr_sem'] == 3 && $stud_details['entry_mode'] == 'R' && $stud_details['cgpa'] > 7.5) ||
+        ($stud_details['curr_sem'] == 4 && $stud_details['entry_mode'] == 'L' && $stud_details['cgpa'] > 7.5)){
             echo "<h1 style='text-align: center; background-color: gray; padding: 1rem'>Your CGPA: ".$stud_details['cgpa']."</h1><br>";
     ?>
 	<h1 style="text-align: center">Honor/Minor Pre-registration</h1>

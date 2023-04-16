@@ -1,6 +1,6 @@
 <?php
 
-    include 'header.php';
+    include '../header.php';
 
     // Retrieve eligible student options
     $options_query = "SELECT REGNO, OPT1_PRGM_ID, OPT2_PRGM_ID, OPT3_PRGM_ID, CGPA 
@@ -18,7 +18,7 @@
 
     // Get the list of programs with at least 10 eligible students
     $eligible_programs = array();
-    while ($row = $opt_count_result->fetch_assoc()) {
+    while ($row = $opt_count_result->fetch(PDO::FETCH_ASSOC)) {
     $eligible_programs[] = $row["OPT1_PRGM_ID"];
     }
 
@@ -35,6 +35,5 @@
     $conn->query($allotment_query);
 
     // Close the database connection
-    $conn->close();
 
 ?>

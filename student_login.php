@@ -34,5 +34,13 @@
     </div>
 
         <a href = "./Student Enrollment/enroll.php"><button class = 'btnn'>Student Enrolment (For newly Admitted students)</button></a>
+
+        <button class="small_btn" onclick="goback()">Back</button>
+
+        <script>
+            function goback() {
+                window.location.href = "index.php";
+            }
+        </script>
 </body>
 </html>
