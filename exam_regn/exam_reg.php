@@ -54,37 +54,70 @@
         
         $registered_courses = $subjectquery -> fetchAll(PDO::FETCH_ASSOC);   
 
-        //query to bring in all the history of arrears for that student
-        $arrear_q = $conn -> prepare("SELECT regno, course_code, session from u_external_marks
-        where regno=:regno and grade in ('F','Z')");
-        $arrear_q -> bindParam(':regno', $_SESSION['regno']);
-        $arrear_q -> execute();
+        // //query to bring in all the history of arrears for that student
+        // $arrear_q = $conn -> prepare("SELECT regno, course_code, session from u_external_marks
+        // where regno=:regno and grade in ('F','Z')");
+        // $arrear_q -> bindParam(':regno', $_SESSION['regno']);
+        // $arrear_q -> execute();
 
-        $arrear_courses = $arrear_q -> fetchAll(PDO::FETCH_ASSOC);
+        // $arrear_courses = $arrear_q -> fetchAll(PDO::FETCH_ASSOC);
 
-        $arrears_array = array();
+        // $arrears_array = array();
         
-        foreach($arrear_courses as $arrear)
-        {
-            //pushing all the arrear history into arrears_array 
-            array_push(
-                $arrears_array, 
-                array($arrear['regno'],$arrear['course_code'], $arrear['session'])
-            );
-        }
+        // foreach($arrear_courses as $arrear)
+        // {
+        //     //pushing all the arrear history into arrears_array 
+        //     array_push(
+        //         $arrears_array, 
+        //         array($arrear['regno'],$arrear['course_code'], $arrear['session'])
+        //     );
+        // }
 
-        foreach ($arrears_array as $i => $row) {
-            $a_query = $conn -> prepare("SELECT * from u_external_marks 
-                where regno='$row[0]' 
-                and grade not in ('F','Z') 
-                and course_code='$row[1]'");
-            $a_query -> execute();
-            $n = $a -> rowCount();
-            if($n>0){
-                unset($arrears_array[$i]);
+        // foreach ($arrears_array as $i => $row) {
+        //     $a_query = $conn -> prepare("SELECT * from u_external_marks 
+        //         where regno='$row[0]' 
+        //         and grade not in ('F','Z') 
+        //         and course_code='$row[1]'");
+        //     $a_query -> execute();
+        //     $n = $a -> rowCount();
+        //     if($n>0){
+        //         unset($arrears_array[$i]);
+        //     }
+        // }
+
+        //fetching the arrears
+        
+        function fetch_arrear_courses($conn, $regno) {
+
+            // Query to fetch arrear courses for the given registration number
+            $sql = "SELECT course_code, session
+                    FROM u_external_marks
+                    WHERE regno = '$regno'
+                    AND grade IN ('F', 'Z')
+                    AND course_code NOT IN (
+                        SELECT course_code
+                        FROM u_external_marks
+                        WHERE regno = '$regno'
+                        AND grade NOT IN ('F', 'Z')
+                    )";
+
+            // Execute the query and fetch results
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            if (!$stmt) {
+                $error = $conn->errorInfo();
+                echo "Error: " . $error[2];
+                return;
             }
-        }
 
+            $arrear_courses = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+            // Return the arrear courses
+            return $arrear_courses;
+        }
+        
+
+        $arrears_array = fetch_arrear_courses($conn, $_SESSION['regno']);
         $_SESSION['current_backlogs'] = $arrears_array;
     ?>
     
@@ -183,3 +216,4 @@
     </div>
     </body>
 </html>
+
