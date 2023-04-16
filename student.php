@@ -48,5 +48,13 @@
         <?php
             }
         ?>
+
+        <button class="small_btn" onclick="goback()">Back</button>
+
+        <script>
+            function goback() {
+                window.location.href = "student_login.php";
+            }
+        </script>
     </body>
 </html>
