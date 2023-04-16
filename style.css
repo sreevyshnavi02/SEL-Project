@@ -268,7 +268,8 @@ td {
 }
 
 .stud_details_table,
-.oec_details_table {
+.oec_details_table,
+.hm_reg_table {
   border-collapse: collapse;
   border: 1px solid gray;
   margin-top: 1rem;

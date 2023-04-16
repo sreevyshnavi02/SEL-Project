@@ -1,39 +1,53 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTU-COE</title>
+</head>
+<body>
+    <?php
+        include '../header.php';
 
-    include '../header.php';
+        // Retrieve eligible student options
+        $options_query = "SELECT h.REGNO, s.sname, OPT1_PRGM_ID, OPT2_PRGM_ID, OPT3_PRGM_ID, CGPA 
+                        FROM u_hm_preregistration h, u_student s
+                        WHERE CGPA > 7.5 and s.regno = h.regno;";
+        $options_result = $conn->query($options_query);
+        $registrations = $options_result -> fetchAll(PDO::FETCH_ASSOC);
 
-    // Retrieve eligible student options
-    $options_query = "SELECT REGNO, OPT1_PRGM_ID, OPT2_PRGM_ID, OPT3_PRGM_ID, CGPA 
-                    FROM u_hm_preregistration 
-                    WHERE CGPA > 7.5;";
-    $options_result = $conn->query($options_query);
+        //creating a html table
+        echo "<h1 style='text-align:center;'>Received Pre-registrations</h1>";
+        echo ("<table class='hm_reg_table'>");
+            echo("<tr>");
+            echo("<th>REGNO</th>");
+            echo("<th>Name</th>");
+            echo("<th>CGPA</th>");
+            echo("<th>OPTION 1</th>");
+            echo("<th>OPTION 2</th>");
+            echo("<th>OPTION 3</th>");
+            echo("</tr>");
 
-    // Check if a minimum of 10 students opt for a program
-    $opt_count_query = "SELECT COUNT(REGNO) AS opt_count, OPT1_PRGM_ID 
-                        FROM u_hm_preregistration 
-                        WHERE OPT1_PRGM_ID IS NOT NULL AND CGPA > 7.5 
-                        GROUP BY OPT1_PRGM_ID 
-                        HAVING opt_count >= 10;";
-    $opt_count_result = $conn->query($opt_count_query);
 
-    // Get the list of programs with at least 10 eligible students
-    $eligible_programs = array();
-    while ($row = $opt_count_result->fetch(PDO::FETCH_ASSOC)) {
-    $eligible_programs[] = $row["OPT1_PRGM_ID"];
-    }
+        foreach($registrations as $reg){
+            echo("<tr>");
+            echo("<td>".$reg['REGNO']."</td>");
+            echo("<td>".$reg['sname']."</td>");
+            echo("<td>".$reg['CGPA']."</td>");
+            echo("<td>".$reg['OPT1_PRGM_ID']."</td>");
+            echo("<td>".$reg['OPT2_PRGM_ID']."</td>");
+            echo("<td>".$reg['OPT3_PRGM_ID']."</td>");
+            echo("</tr>");
+        }
+        echo("</table>")
+    ?>
+    <button class="small_btn" onclick="goback()">Allot programmes</button>
 
-    // Allot programs to eligible students
-    $allotment_query = "INSERT INTO u_hm_allotment (regno, alloted_prgm, allotment_date) 
-                        SELECT regno, opt1_prgm_id, CURRENT_DATE() 
-                        FROM ( 
-                        SELECT REGNO, OPT1_PRGM_ID, CGPA 
-                        FROM u_hm_preregistration 
-                        WHERE OPT1_PRGM_ID IN (" . implode(',', $eligible_programs) . ") AND CGPA > 7.5 
-                        ORDER BY CGPA DESC 
-                        LIMIT 40
-                        ) AS eligible_students;";
-    $conn->query($allotment_query);
-
-    // Close the database connection
-
-?>
+    <script>
+        function goback() {
+            window.location.href = "admin_allot_hm_logic.php";
+        }
+    </script>
+</body>
+</html>
