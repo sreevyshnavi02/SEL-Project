@@ -209,3 +209,76 @@ td {
   font-size: large;
   font-weight: 700;
 }
+
+.box {
+  max-width: fit-content;
+  margin: auto;
+}
+
+.allotment-order-header {
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(225, 224, 224));
+  height: fit-content;
+  margin: 1rem;
+  min-width: fit-content;
+  display: flex;
+}
+
+.allotment-order-header > .univ_name {
+  margin: auto;
+}
+
+.allotment-order-header > .univ_logo {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.univ_logo > img {
+  height: 8rem;
+  width: auto;
+}
+
+.photo > img {
+  height: 12rem;
+}
+
+.photo {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 3rem;
+}
+
+.stud_details_box {
+  margin: auto;
+  display: flex;
+  border: 3px solid gray;
+  border-radius: 1rem;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 3rem;
+}
+
+.stud_details {
+  padding: 2rem;
+}
+
+.stud_details > h2,
+.oec_title > h2 {
+  text-align: center;
+}
+
+.stud_details_table,
+.oec_details_table {
+  border-collapse: collapse;
+  border: 1px solid gray;
+  margin-top: 1rem;
+}
+
+.oec_box {
+  border: 3px solid gray;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: fit-content;
+  margin: auto;
+  margin-top: 3rem;
+}

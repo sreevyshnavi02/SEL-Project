@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTU-COE</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js">
+    </script>
 </head>
 <body>
     <!-- display student details -->
-    <div class="box">
-        <div class="header">
-            <img src="../images/logo_ptu.png" alt="ptu-logo">
+    <div class="box" id="makepdf">
+        <div class="allotment-order-header">
+            <div class="univ_logo">
+                <img src="../images/logo_ptu.png" alt="ptu-logo">
+            </div>
             <div class="univ_name">
                 <h1>PUDUCHERRY TECHNOLOGICAL UNIVERSITY</h1>
                 <h2>(Erstwhile Pondicherry Engineering College)</h2>
@@ -26,50 +30,51 @@
                 echo "<img src=$src alt='stud_photo'>";
                 ?>
             </div>
-            <h2>STUDENT DETAILS</h2>
+            <div class="stud_details">
 
-            <!-- Fetching the data -->
-            <?php 
+                <h2>STUDENT DETAILS</h2>
+                
+                <!-- Fetching the data -->
+                <?php 
 
-            include '../connection.php';
+                $stud_details_sql = "select s.REGNO, s.SNAME, s.EMAIL, s.CURR_SEM, p.PRGM_NAME, d.DEPT_NAME from u_student s, u_prgm p, u_dept d where s.regno = :regno and p.prgm_id = s.prgm_id and d.dept_id = p.dept_id;";
+                $stud_details_query = $conn -> prepare($stud_details_sql);
+                $stud_details_query -> bindParam(':regno', $_SESSION['regno']);
+                $stud_details_query -> execute();
 
-            $stud_details_sql = "select s.REGNO, s.SNAME, s.EMAIL, s.CURR_SEM, p.PRGM_NAME, d.DEPT_NAME from u_student s, u_prgm p, u_dept d where s.regno = :regno and p.prgm_id = s.prgm_id and d.dept_id = p.dept_id;";
-            $stud_details_query = $conn -> prepare($stud_details_sql);
-            $stud_details_query -> bindParam(':regno', $_SESSION['regno']);
-            $stud_details_query -> execute();
+                //to fetch the results
+                $stud_details_fetch = $stud_details_query -> fetchAll(PDO::FETCH_ASSOC);
 
-            //to fetch the results
-            $stud_details_fetch = $stud_details_query -> fetchAll(PDO::FETCH_ASSOC);
+                foreach($stud_details_fetch as $stud_details){
+                    ?>
 
-            foreach($stud_details_fetch as $stud_details){
-            ?>
-
-            <table class="stud_details_table">
-                <tr>
-                    <th>NAME</th>
-                    <td><?php echo "$stud_details[SNAME]"; ?></td>
-                </tr>
-                <tr>
-                    <th>REGISTER NUMBER</th>
-                    <td><?php echo "$stud_details[REGNO]"; ?></td>
-                </tr>
-                <tr>
-                    <th>EMAIL</th>
-                    <td><?php echo "$stud_details[EMAIL]"; ?></td>
-                </tr>
-                <tr>
-                    <th>PROGRAMME</th>
-                    <td><?php echo "$stud_details[PRGM_NAME]"; ?></td>
-                </tr>
-                <tr>
-                    <th>DEPARTMENT</th>
-                    <td><?php echo "$stud_details[DEPT_NAME]"; ?></td>
-                </tr>
-                <tr>
-                    <th>SEMESTER</th>
-                    <td><?php echo "$stud_details[CURR_SEM]"; ?></td>
-                </tr>
-            </table>
+                <table class="stud_details_table">
+                    <tr>
+                        <th>NAME</th>
+                        <td><?php echo "$stud_details[SNAME]"; ?></td>
+                    </tr>
+                    <tr>
+                        <th>REGISTER NUMBER</th>
+                        <td><?php echo "$stud_details[REGNO]"; ?></td>
+                    </tr>
+                    <tr>
+                        <th>EMAIL</th>
+                        <td><?php echo "$stud_details[EMAIL]"; ?></td>
+                    </tr>
+                    <tr>
+                        <th>PROGRAMME</th>
+                        <td><?php echo "$stud_details[PRGM_NAME]"; ?></td>
+                    </tr>
+                    <tr>
+                        <th>DEPARTMENT</th>
+                        <td><?php echo "$stud_details[DEPT_NAME]"; ?></td>
+                    </tr>
+                    <tr>
+                        <th>SEMESTER</th>
+                        <td><?php echo "$stud_details[CURR_SEM]"; ?></td>
+                    </tr>
+                </table>
+            </div>
 
             <?php 
             } 
@@ -90,7 +95,9 @@
 
         <div class="oec_box">
             <div class="oec_title">
-                OPEN ELECTIVE COURSE PRE-REGISTRATION DETAILS
+                <h2>
+                    OPEN ELECTIVE COURSE PRE-REGISTRATION DETAILS
+                </h2>
             </div>
             <div class="oec_details">
                 <table class="oec_details_table">
@@ -114,5 +121,17 @@
         ?>
 
     </div>
+
+    <button class="small_btn" id="print">Download</button>
+    <script>
+        console.log('print pdf');
+        var button = document.getElementById("print");
+        var makepdf = document.getElementById("makepdf");
+
+        button.addEventListener("click", function () {
+            console.log("download btn clicked");
+            html2pdf().from(makepdf).save();
+        });
+    </script> 
 </body>
 </html>
