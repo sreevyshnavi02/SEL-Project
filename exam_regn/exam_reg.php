@@ -8,11 +8,6 @@
     <?php
         include '../connection.php';
 
-        // getting the session chosen by the user
-        $year =  $_POST['session_year'];
-        $formatted_year = $year[strlen($year) - 2].$year[strlen($year) - 1];
-        $_SESSION['chosen_session'] = $formatted_year.$_POST['session_month'];
-        
         //fetching the details of the student based on regno
         $stmt = $conn->prepare("SELECT s.sname, p.prgm_name, d.dept_name 
             FROM u_student s 
@@ -53,37 +48,6 @@
         $subjectquery -> execute();
         
         $registered_courses = $subjectquery -> fetchAll(PDO::FETCH_ASSOC);   
-
-        // //query to bring in all the history of arrears for that student
-        // $arrear_q = $conn -> prepare("SELECT regno, course_code, session from u_external_marks
-        // where regno=:regno and grade in ('F','Z')");
-        // $arrear_q -> bindParam(':regno', $_SESSION['regno']);
-        // $arrear_q -> execute();
-
-        // $arrear_courses = $arrear_q -> fetchAll(PDO::FETCH_ASSOC);
-
-        // $arrears_array = array();
-        
-        // foreach($arrear_courses as $arrear)
-        // {
-        //     //pushing all the arrear history into arrears_array 
-        //     array_push(
-        //         $arrears_array, 
-        //         array($arrear['regno'],$arrear['course_code'], $arrear['session'])
-        //     );
-        // }
-
-        // foreach ($arrears_array as $i => $row) {
-        //     $a_query = $conn -> prepare("SELECT * from u_external_marks 
-        //         where regno='$row[0]' 
-        //         and grade not in ('F','Z') 
-        //         and course_code='$row[1]'");
-        //     $a_query -> execute();
-        //     $n = $a -> rowCount();
-        //     if($n>0){
-        //         unset($arrears_array[$i]);
-        //     }
-        // }
 
         //fetching the arrears
         
