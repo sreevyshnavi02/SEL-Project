@@ -23,4 +23,4 @@ Tasks Involved:
 
 - [ ] T11: Course Registration by students
 - [x] T12: Registration for regular exams
-- [ ] T13: Registration for arrear exams
+- [x] T13: Registration for arrear exams
