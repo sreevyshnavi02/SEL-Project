@@ -26,6 +26,7 @@ Tasks Involved:
 - [x] T13: Registration for arrear exams
 
 - [ ] Provision to enable and disable various regns
+- [ ] For course and exam regn - which sem?
 - [ ] Display options for regn only when it is enabled by admin
 - [ ] Back navigation in every page
 - [ ] Error handling - do not allow display of error msgs to the user
