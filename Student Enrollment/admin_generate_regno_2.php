@@ -39,7 +39,7 @@
         $roll_num += 1;
     }
 
-    echo "<h1>Registration numbers generated successfully.</h1>";
+    echo "<h1 style='align-text: center;'>Registration numbers generated successfully.</h1>";
 
     // Function to get department ID from u_prgm table
     function get_dept_id($conn, $prgm_id) {
