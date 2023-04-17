@@ -41,5 +41,13 @@
         
         <input type="submit" value="Proceed" name="submit_session" class = "submit_session">
     </form>
+
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "admin.php";
+        }
+    </script>
 </body>
 </html>
