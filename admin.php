@@ -8,6 +8,7 @@
     <body>
         <?php include 'header.php'; ?>
         <div class="provision">
+            <a href = "./enable_disable_regns.php"><button class = 'btnn'>Manage student registrations</button></a>
             <a href = "./Student Enrollment/admin_before_regno_gen.php"><button class = 'btnn'>Generate Register Numbers</button></a>
             <a href = "./Student Enrollment/admin_before_email_gen.php"><button class = 'btnn'>Generate Institution Email IDs</button></a>
             <!-- <a href = "./Student Enrollment/nominal_roll.php"><button class = 'btnn'>Generate Nominal Roll</button></a> -->
