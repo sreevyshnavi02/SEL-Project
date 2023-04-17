@@ -24,3 +24,17 @@ Tasks Involved:
 - [ ] T11: Course Registration by students
 - [x] T12: Registration for regular exams
 - [x] T13: Registration for arrear exams
+
+- [ ] Provision to enable and disable various regns
+- [ ] Display options for regn only when it is enabled by admin
+- [ ] Back navigation in every page
+- [ ] Error handling - do not allow display of error msgs to the user
+- [ ] Check corner cases
+- [ ] Ensuring the user has come to the pages that need authentication only after logging in
+- [ ] Provision to download as pdf wherever reqd
+- [ ] Provision for student to view and edit their responses wherever applicable
+- [ ] Ask for confirmation before form submissions
+- [ ] Admins must be able to view all data
+- [ ] Admins must be able to filter the data based on various parameters - ajax might come handy
+- [ ] Admins must be able to search for the reqd records
+- [ ] Look at different User Interfaces for inspiration and make the UI better
