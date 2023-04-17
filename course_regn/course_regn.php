@@ -1,58 +1,84 @@
-<?php
- include '../header.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTU-COE</title>
+</head>
+<body>
+    <?php include "../header.php"; ?>
+    <!-- Display compulsory courses -->
+    <h2>Compulsory Courses</h2>
+    <table class="courses">
+        <tr>
+            <th>Course Code</th>
+            <th>Course Name</th>
+            <th>Credits</th>
+            <th>Faculty 1</th>
+            <th>Faculty 2</th>
+        </tr>
+        <?php
+        $stud_data = get_stud_data($conn, $_SESSION['regno']);
+        $comp_courses = fetch_comp_courses($conn, $stud_data['prgm_id'], $stud_data['curr_sem']);
 
-// Fetch compulsory courses from u_prgm_comp_course table
-$regno = $_SESSION['regno'];
+        foreach($comp_courses as $c){
+            $course = fetch_course_details($conn, $c['course_code']);
+            echo "<tr>";
+            echo "<td>".$course['COURSE_CODE']."</td>";
+            echo "<td>".$course['COURSE_NAME']."</td>";
+            echo "<td>".$course['CREDITS']."</td>";
+            echo "<td>".display_fac_names($conn)."</td>";
 
-$sql = "SELECT comp.COURSE_CODE, c.COURSE_NAME, c.CREDITS, f.FNAME 
-from u_course c, u_prgm_comp_course comp, 
-u_student s, u_fac_course fc, u_faculty f 
-where comp.prgm_id = s.prgm_id and
-comp.course_code = c.course_code and
-s.regno = ?";
-// -- fc.course_code = comp.course_code and 
-// -- f.faculty_id = fc.faculty_id and
+            
+            echo "</tr>";
+        }
+        ?>
+    </table>
+    <!-- Display Open elective courses if applicable -->
+    <!-- Display Program elective courses offered for that sem to choose from -->
+    <!-- Display Honor/Minor course if applicable -->
+    <!-- Display uncleared mandatory 0 cred course if not cleared in the prev sem -->
+</body>
+</html>
 
-$stmt = $conn->prepare($sql);
-$stmt->execute([$regno]);
-$compulsory_courses = $stmt->fetchAll();
 
-// $_SESSION['session'] = '23A';
-// Fetch OEC course from u_oec_allotment table
-// $session = $_SESSION['session']; // Replace with a variable if needed
-// $sql = "SELECT crs.COURSE_CODE, crs.COURSE_NAME, crs.CREDITS, f.FNAME 
-//         FROM u_oec_allotment o 
-//         INNER JOIN u_course crs ON o.COURSE_CODE = crs.COURSE_CODE 
-//         LEFT JOIN u_faculty f ON fc.FACULTY_ID = f.FACULTY_ID 
-//         WHERE o.REGNO = ? AND o.SESSION = ?";
-// $stmt = $conn->prepare($sql);
-// $stmt->execute([$regno, $session]);
-// $oec_course = $stmt->fetch();
+<?php 
+    function get_stud_data($conn, $regno){
+        $query = $conn -> query("select sname, prgm_id, curr_sem 
+        from u_student 
+        where regno = '$regno'");
+        $query -> execute();
+        $row = $query -> fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
 
-// Create an HTML table for the courses
-echo '<table>';
-echo '<thead><tr><th>Course Code</th><th>Course Name</th><th>Credits</th><th>Faculty Name</th></tr></thead>';
-echo '<tbody>';
+    function fetch_comp_courses($conn, $prgm_id, $curr_sem){
+        $query = $conn -> query("select course_code 
+        from u_prgm_comp_course 
+        where prgm_id = '$prgm_id' and sem = '$curr_sem'");
+        $query -> execute();
+        $comp_courses = $query -> fetchAll(PDO::FETCH_ASSOC);
+        return $comp_courses;
+    }
 
-// Add the compulsory courses to the table
-foreach ($compulsory_courses as $row) {
-    print_r('$row');
-    echo '<tr>';
-    echo '<td>' . $row['COURSE_CODE'] . '</td>';
-    echo '<td>' . $row['COURSE_NAME'] . '</td>';
-    echo '<td>' . $row['CREDITS'] . '</td>';
-    echo '<td>' . $row['FNAME'] . '</td>';
-    echo '</tr>';
-}
+    function fetch_course_details($conn, $course_code){
+        $query = $conn -> query("select * 
+        from u_course 
+        where course_code = '$course_code'");
+        $query -> execute();
+        $row = $query -> fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
 
-// Add the OEC course to the table
-// if ($oec_course) {
-//     echo '<tr>';
-//     echo '<td>' . $oec_course['COURSE_CODE'] . '</td>';
-//     echo '<td>' . $oec_course['COURSE_NAME'] . '</td>';
-//     echo '<td>' . $oec_course['CREDITS'] . '</td>';
-//     echo '<td>' . $oec_course['FNAME'] . '</td>';
-//     echo '</tr>';
-// }
-
+    function display_fac_names($conn, $fac_for){
+        $query = $conn -> query("select * from u_faculty");
+        $query -> execute();
+        $fac_names = $query -> fetchAll(PDO::FETCH_ASSOC);
+        echo "<select name='faculty".$fac_for."'>";
+        foreach($fac_names as $fac){
+            echo "<option value=".$fac['faculty_id'].">".$fac['fac_name']."</option>";
+        }
+        echo "</select>";
+    }
 ?>
