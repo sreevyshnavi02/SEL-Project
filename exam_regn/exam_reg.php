@@ -9,7 +9,7 @@
         include '../connection.php';
 
         //fetching the details of the student based on regno
-        $stmt = $conn->prepare("SELECT s.sname, p.prgm_name, d.dept_name 
+        $stmt = $conn->prepare("SELECT s.sname, s.prgm_id, p.prgm_name, d.dept_name 
             FROM u_student s 
             INNER JOIN u_prgm p ON p.prgm_id = s.prgm_id 
             INNER JOIN u_dept d ON d.dept_id = p.dept_id 
@@ -21,6 +21,7 @@
         $name = $stud_details['sname'];
         $prgm_name = $stud_details['prgm_name'];
         $dept_name = $stud_details['dept_name'];
+        $_SESSION['prgm_id'] = $stud_details['prgm_id'];
 
         //query to get the consolidated attendance of the student
         $attendance_q = $conn -> prepare("SELECT consolidated_attendance 
@@ -48,41 +49,6 @@
         $subjectquery -> execute();
         
         $registered_courses = $subjectquery -> fetchAll(PDO::FETCH_ASSOC);   
-
-        //fetching the arrears
-        
-        function fetch_arrear_courses($conn, $regno) {
-
-            // Query to fetch arrear courses for the given registration number
-            $sql = "SELECT course_code, session
-                    FROM u_external_marks
-                    WHERE regno = '$regno'
-                    AND grade IN ('F', 'Z')
-                    AND course_code NOT IN (
-                        SELECT course_code
-                        FROM u_external_marks
-                        WHERE regno = '$regno'
-                        AND grade NOT IN ('F', 'Z')
-                    )";
-
-            // Execute the query and fetch results
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            if (!$stmt) {
-                $error = $conn->errorInfo();
-                echo "Error: " . $error[2];
-                return;
-            }
-
-            $arrear_courses = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-
-            // Return the arrear courses
-            return $arrear_courses;
-        }
-        
-
-        $arrears_array = fetch_arrear_courses($conn, $_SESSION['regno']);
-        $_SESSION['current_backlogs'] = $arrears_array;
     ?>
     
     <div class='img'>
@@ -101,18 +67,6 @@
         <b>Consolidated Attendance:<?php echo "$_SESSION[consolidated_attendance]"."%" ?></b><br>
     </p>
     </div>
-    <h1></h1>
-
-    <!-- to fetch all the arrear courses -->
-    <form action="exam_reg.php" method="POST">
-        <label for="arrear_course">
-            <!-- <?php print_r($_SESSION['current_backlogs']); ?> -->
-        </label>
-        <!-- <input type="checkbox" name="course_chkbox" id="course_chkbox"> -->
-    </form>
-    <!-- <//?php
-    }
-    ?> -->
 
     <table class='table1' style="width:100%">
         <tr>
@@ -153,6 +107,53 @@
 
             $fee_sum += $fees;
             } 
+
+            foreach($_POST['arrear_courses'] as $a)
+            {
+                $arrear = get_course_details($conn, $a);
+                if(trim($arrear['COURSE_TYPE'])=='TY'){
+                    $arrear['COURSE_TYPE'] = 'Theory';
+                    $fees='250';
+                }
+                elseif(trim($arrear['COURSE_TYPE'])=='LB'){
+                    $arrear['COURSE_TYPE'] = 'Laboratory';
+                    $fees='350';
+                }
+                elseif(trim($arrear['COURSE_TYPE'])=='MC'){
+                    $arrear['COURSE_TYPE'] = 'Mandatory Course';
+                    $fees='0';
+                }
+                else{
+                    echo("else...".$arrear['COURSE_TYPE']);
+                }
+
+                echo "
+                <tr>
+                    <td>".$arrear['COURSE_CODE']."</td>
+                    <td>".$arrear['COURSE_NAME']."</td>
+                    <td>".$arrear['SEM']."</td>
+                    <td>".$arrear['COURSE_TYPE']."</td>
+                    <td>".$fees."</td>
+                </tr>";
+
+            $fee_sum += $fees;
+            } 
+
+
+            function get_course_details($conn, $a){
+                $sql = "select c.COURSE_CODE, COURSE_NAME, COURSE_TYPE, p.SEM 
+                from u_course c, u_prgm_comp_course p
+                where c.course_code = '$a'
+                and p.prgm_id = '$_SESSION[prgm_id] 
+                and p.course_code = c.course_code'";
+                $query = $conn -> query($sql);
+
+                $query -> execute();
+                $arrear = $query -> fetch(PDO::FETCH_ASSOC);
+                return $arrear;
+            }
+
+
         ?>
 
     </table>  
@@ -167,7 +168,7 @@
         else{
             $attendance_shortage_fee = '0';
         }
-     
+
         $totalfees = $applnfees + $marksfees + $fee_sum + $attendance_shortage_fee;
         ?>
         <tr><td>Application Fees</td><td  style="width:15%"><?php echo($applnfees); ?></td></tr>
