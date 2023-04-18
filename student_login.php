@@ -17,7 +17,7 @@
             <div class="label_regno">
                 <label for="regno">Enter your regno: </label>
             </div>
-            <input type="text" name="regno" id="regno">
+            <input type="text" name="regno" id="regno" required>
 
             <!-- <div class="label_OTP">
                 <label for="otp">Enter the OTP: </label>
