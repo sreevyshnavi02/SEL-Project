@@ -24813,3 +24813,100 @@ INSERT INTO `U_FACULTY`(
   'Professor',
   'fac19@ptuniv.edu.in'
 );
+
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('25', 'ITH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('25', 'ITH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('25', 'ITH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('25', 'ITH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('25', 'ITH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('26', 'CSH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('26', 'CSH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('26', 'CSH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('26', 'CSH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('26', 'CSH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('27', 'CEH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('27', 'CEH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('27', 'CEH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('27', 'CEH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('27', 'CEH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('28', 'MEH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('28', 'MEH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('28', 'MEH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('28', 'MEH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('28', 'MEH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('29', 'ECH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('29', 'ECH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('29', 'ECH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('29', 'ECH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('29', 'ECH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('30', 'EEH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('30', 'EEH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('30', 'EEH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('30', 'EEH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('30', 'EEH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('31', 'EIH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('31', 'EIH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('31', 'EIH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('31', 'EIH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('31', 'EIH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('32', 'CHH01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('32', 'CHH02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('32', 'CHH03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('32', 'CHH04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('32', 'CHH05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('33', 'ITM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('33', 'ITM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('33', 'ITM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('33', 'ITM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('33', 'ITM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('34', 'CSM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('34', 'CSM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('34', 'CSM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('34', 'CSM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('34', 'CSM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('35', 'CEM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('35', 'CEM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('35', 'CEM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('35', 'CEM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('35', 'CEM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('36', 'MEM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('36', 'MEM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('36', 'MEM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('36', 'MEM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('36', 'MEM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('37', 'ECM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('37', 'ECM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('37', 'ECM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('37', 'ECM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('37', 'ECM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('38', 'EEM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('38', 'EEM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('38', 'EEM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('38', 'EEM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('38', 'EEM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('39', 'EIM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('39', 'EIM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('39', 'EIM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('39', 'EIM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('39', 'EIM05', '7');
+
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM01', '3');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM02', '4');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM03', '5');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM04', '6');
+INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM05', '7');
