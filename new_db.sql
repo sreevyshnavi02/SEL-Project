@@ -24910,3 +24910,7 @@ INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 
 INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM03', '5');
 INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM04', '6');
 INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 'CHM05', '7');
+
+
+INSERT INTO `u_hm_allotment`(`regno`, `alloted_prgm`) VALUES ('18CE1004', '27');
+INSERT INTO `u_hm_allotment`(`regno`, `alloted_prgm`) VALUES ('18CE1005', '27');
