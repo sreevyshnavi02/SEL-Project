@@ -67,7 +67,10 @@ table {
 #otp,
 .input_session,
 #session_month,
-#session_year {
+#session_year,
+.input_yoj,
+#yoj,
+.label_prgm {
   /* input field */
   margin: 1rem auto 1rem auto;
   display: block;
@@ -75,6 +78,15 @@ table {
   min-height: 2rem;
   font-weight: 700;
   text-align: center;
+  font-size: larger;
+}
+
+#prgm_id {
+  margin: 1rem auto 1rem auto;
+  display: block;
+  width: 50%;
+  min-height: 2rem;
+  font-weight: 700;
   font-size: larger;
 }
 
@@ -282,4 +294,18 @@ td {
   width: fit-content;
   margin: auto;
   margin-top: 3rem;
+}
+
+.stud_details_crs {
+  padding: 2rem;
+  background-color: rgb(197, 195, 195);
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.course_regn > h2 {
+  padding: 2rem;
+  background-color: rgb(217, 246, 174);
+  margin-top: 2rem;
 }
