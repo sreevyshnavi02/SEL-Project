@@ -24914,3 +24914,6 @@ INSERT INTO `u_prgm_comp_course`(`PRGM_ID`, `COURSE_CODE`, `SEM`) VALUES ('40', 
 
 INSERT INTO `u_hm_allotment`(`regno`, `alloted_prgm`) VALUES ('18CE1004', '27');
 INSERT INTO `u_hm_allotment`(`regno`, `alloted_prgm`) VALUES ('18CE1005', '27');
+
+INSERT INTO `u_external_marks`(`REGNO`, `COURSE_CODE`, `SESSION`, `GRADE`) VALUES ('18CE1004', 'SH202', '22A', 'F');
+INSERT INTO `u_external_marks`(`REGNO`, `COURSE_CODE`, `SESSION`, `GRADE`) VALUES ('18CE1005', 'SH202', '22A', 'F');
