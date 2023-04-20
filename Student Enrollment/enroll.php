@@ -8,12 +8,17 @@
 </head>
 <body>
     <script>
+        var input_field_enable = 0;
+
         function check_appn_num(entered_appn_num){
             var xmlhttp = new XMLHttpRequest();
+            const input_fields = document.getElementsByClassName('init_disabled');
+            console.log(input_fields);
+
             xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+                if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("txt").innerHTML = this.responseText;
-            }
+                }
             };
             xmlhttp.open("GET", "check_appn_num.php?q=" + entered_appn_num, true);
             xmlhttp.send();
@@ -25,48 +30,51 @@
     <form action="enrolment_form_submit.php" method="post">
     <h1 class="main_heading"> STUDENT ENROLLMENT</h1>
     <table class="stud_enrollment_table">
-            <!--------------------- First Name ------------------------------------------>
-            <tr>
-            <td>Full Name (with Initials at back)</td>
-            <td><input type="text" name="Name" maxlength="100" required />
-            </td>
-            </tr>
+            
 
             <!------------------------ Application number --------------------------------------->
             <tr>
             <td>Application number</td>
-            <td><input type="text" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)" required/>
+            <td><input type="text" name="appn_num" maxlength="20" onkeyup="check_appn_num(this.value)" required />
             <span id="txt"></span>
             </td>
             </tr>
+
+            <!--------------------- Full Name ------------------------------------------>
+            <tr>
+            <td>Full Name (with Initials at back)</td>
+            <td><input type="text" name="Name" maxlength="100" required class="init_disabled"  />
+            </td>
+            </tr>
+
             <!---------------------- Centac/Josaa ------------------------------------->
             <tr>
             <td>Centac/Josaa</td>
             <td>
-            <input type="radio" name="Centac/Josaa" value="Centac" required />
+            <input type="radio" name="Centac/Josaa" value="Centac" required class="init_disabled"  />
             Centac
-            <input type="radio" name="Centac/Josaa" value="Josaa" required />
+            <input type="radio" name="Centac/Josaa" value="Josaa" required class="init_disabled"  />
             Josaa
             </td>
             </tr>
             <!--------------------- Father's Name ------------------------------------------>
             <tr>
             <td>Father's Name</td>
-            <td><input type="text" name="Father_name" maxlength="50" required />
+            <td><input type="text" name="Father_name" maxlength="50" required class="init_disabled"  />
 
             </td>
             </tr>
             <!--------------------- Mother's Name ------------------------------------------>
             <tr>
             <td>Mother's Name</td>
-            <td><input type="text" name="Mother_name" maxlength="50" required />
+            <td><input type="text" name="Mother_name" maxlength="50" required class="init_disabled"  />
 
             </td>
             </tr>
             <!--------------------------Date Of Birth----------------------------------->
             <tr>
             <td>Date of Birth</td>
-            <td><input type="date" name="dob" id="dob" required>
+            <td><input type="date" name="dob" id="dob" required class="init_disabled"  >
             </td>
             </tr>
 
@@ -74,16 +82,16 @@
             <tr>
             <td>Year of Joining</td>
             <td>
-            <input type="text" name="year" id="joining" required>
+            <input type="text" name="year" id="joining" required class="init_disabled"  >
             </td>
             </tr>
             <!---------------------- Gender ------------------------------------->
             <tr>
             <td>Gender</td>
             <td>
-            <input type="radio" name="Gender" value="Male" required/>
+            <input type="radio" name="Gender" value="Male" required class="init_disabled"  />
             Male
-            <input type="radio" name="Gender" value="Female" required/>
+            <input type="radio" name="Gender" value="Female" required class="init_disabled"  />
             Female
             </td>
             </tr>
@@ -91,14 +99,14 @@
             <tr>
             <td>Mobile Number</td>
             <td>
-            <input type="text" name="MobileNumber" maxlength="10" placeholder="Mobile Number" required/>
+            <input type="text" name="MobileNumber" maxlength="10" placeholder="Mobile Number" required class="init_disabled"  />
             </td>
             </tr>
 
             <!-------------------------- Email ID ------------------------------------->
             <tr>
             <td>Email ID</td>
-            <td><input type="email" name="EmailID" maxlength="100" placeholder="Your email ID" required/></td>
+            <td><input type="email" name="EmailID" maxlength="100" placeholder="Your email ID" required class="init_disabled"  /></td>
             </tr>
 
 
@@ -106,19 +114,19 @@
             <tr>
             <td>Address Line 1</td>
             <td>
-                <input type="text" name="address_line1" required/>
+                <input type="text" name="address_line1" required class="init_disabled"  />
             </td>
             </tr>
             <tr>
             <td>Address Line 2</td>
             <td>
-                <input type="text" name="address_line2" required/>
+                <input type="text" name="address_line2" required class="init_disabled"  />
             </td>
             </tr>
             <tr>
             <td>State</td>
             <td>
-                <input type="text" name="address_state" required/>
+                <input type="text" name="address_state" required class="init_disabled"  />
             </td>
             </tr>
 
@@ -128,10 +136,10 @@
             <td>Nationality</td>
             <td>
                 <label>
-                <input type="radio" name="Nationality" value="Indian" checked required> Indian
+                <input type="radio" name="Nationality" value="Indian" checked required class="init_disabled"  > Indian
                 </label>
                 <label>
-                <input type="radio" name="Nationality" value="Others" required> Others
+                <input type="radio" name="Nationality" value="Others" required class="init_disabled"  > Others
                 </label>
                 <input type="text" name="Other_Nationality" maxlength="50" placeholder="Specify the Nationality" style="display: none;">
             </td>
@@ -153,7 +161,7 @@
             <tr>
             <td>Community</td>
             <td> 
-            <select name="caste" id="caste" required>
+            <select name="caste" id="caste" required class="init_disabled"  >
             <option value = "obc"> Other Backward Caste
             </option> 
             <option value = "mbc"> Most Backward Caste
@@ -175,7 +183,7 @@
             <tr>
             <td>Method Of Study</td>
             <td> 
-            <select name="type" id="regular" required>
+            <select name="type" id="regular" required class="init_disabled"  >
             <option value = "R"> Regular
             </option> 
             <option value = "L"> Lateral Entry
@@ -207,7 +215,7 @@
             <tr>
             <td>Programme:</td>
             <td>
-                <select name="prgm" id="prgm" required>
+                <select name="prgm" id="prgm" required class="init_disabled"  >
                     <option value="" selected="selected">Select programme</option>
                     <?php 
                         foreach ($prgms_offered as $result) {
@@ -220,7 +228,7 @@
             </tr>
             <tr>
                 <td colspan='2'>
-                    <input type="checkbox" name="confirm" id="confirm" required>
+                    <input type="checkbox" name="confirm" id="confirm" required class="init_disabled"  >
                     <label for="confirm">I hereby confirm that I have checked the data entered and it is correct to the best of my knowledge.</label>
                 </td>
             </tr>
@@ -228,7 +236,7 @@
             <!--------------------- Photo ------------------------------------------>
             <!-- <tr>
             <td>Passport size photo upload</td>
-            <td><input type="file" name="image" id="fileToUpload" required>
+            <td><input type="file" name="image" id="fileToUpload" required class="init_disabled"  >
             </td>
             </tr> -->
 
