@@ -40,7 +40,7 @@
             <th>Course Code</th>
             <th>Course Name</th>
             <th>Offered By(Department Name)</th>
-            <th>Offered By(Faculty Name)</th>
+            <!-- <th>Offered By(Faculty Name)</th> -->
             <th>Credits</th>
             <th>Max number of students</th>
         </tr>
@@ -76,23 +76,24 @@
                 <td><input type="text" value="'.$oec["course_name"].'" name="data['.$row_count.'][]"></td>
                 <td><input type="text" value="'.$oec["dept_id"].'" name="data['.$row_count.'][]"></td>';
                 
-                echo '
-                <td>
-                <select name="data['.$row_count.'][]" id="fname">
-                <option value="'.$oec["faculty_id"].'">'.$oec["faculty_id"].' - '.$oec["fname"].'</option>';
+                // echo '
+                // <td>
+                // <input type="text" value="'.$oec["faculty_id"].'" name="data['.$row_count.'][]">
+                // </td>';
+                // <select name="data['.$row_count.'][]" id="fname">
+                // <option value="'.$oec["faculty_id"].'">'.$oec["faculty_id"].' - '.$oec["fname"].'</option>';
 
-                
-                $fac_list_query -> bindParam(':fid', $oec['faculty_id']);
-                $fac_list_query -> execute();
+                // $fac_list_query -> bindParam(':fid', $oec['faculty_id']);
+                // $fac_list_query -> execute();
 
-                $fac_list = $fac_list_query -> fetchAll(PDO::FETCH_ASSOC);
+                // $fac_list = $fac_list_query -> fetchAll(PDO::FETCH_ASSOC);
 
-                foreach($fac_list as $fac_list_row){
-                    echo'
-                    <option value="'.$fac_list_row["faculty_id"].'">'.$fac_list_row["faculty_id"].' - '.$fac_list_row["fname"].'</option>
-                    </select>
-                    </td>';
-                }
+                // foreach($fac_list as $fac_list_row){
+                //     echo'
+                //     <option value="'.$fac_list_row["faculty_id"].'">'.$fac_list_row["faculty_id"].' - '.$fac_list_row["fname"].'</option>
+                //     </select>
+                //     </td>';
+                // }
                 
                 ?>
                 <!-- 
@@ -132,6 +133,14 @@
 
     <button onclick="<?php header('location: ') ?>"></button>
 
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../admin.php";
+        }
+    </script>
+
     <script>
         function add_new_row(){
             console.log("adding new row..");
@@ -146,24 +155,9 @@
             var cell3 = row.insertCell(2);
             cell3.innerHTML = "<input type = 'text' name='data[" + encodeURIComponent(count) + "][]'>";
             var cell4 = row.insertCell(3);
-            cell4.innerHTML = "<select name='data[" + encodeURIComponent(count) + "][]'>";
-                // <option value="'.$oec["faculty_id"].'">'.$oec["faculty_id"].' - '.$oec["fname"].'</option>';
-                
-                // $fac_list_query -> bindParam(':fid', $oec['faculty_id']);
-                // $fac_list_query -> execute();
-
-                // $fac_list = $fac_list_query -> fetchAll(PDO::FETCH_ASSOC);
-
-                // foreach($fac_list as $fac_list_row){
-                //     echo'
-                //     <option value="'.$fac_list_row["faculty_id"].'">'.$fac_list_row["faculty_id"].' - '.$fac_list_row["fname"].'</option>
-                //     </select>
-                //     </td>';
-                // }
+            cell4.innerHTML = "<input type = 'number' name='data[" + encodeURIComponent(count) + "][]'>";
             var cell5 = row.insertCell(4);
             cell5.innerHTML = "<input type = 'number' name='data[" + encodeURIComponent(count) + "][]'>";
-            var cell6 = row.insertCell(5);
-            cell6.innerHTML = "<input type = 'number' name='data[" + encodeURIComponent(count) + "][]'>";
             count++;
         }
 
