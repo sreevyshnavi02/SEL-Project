@@ -44,17 +44,17 @@
         //display the arrear courses
         $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         ?>
-        <form action="exam_reg.php" method="post">
+        <form action="exam_reg.php" method="post" class = "arrear_reg_form">
 
         <h3>Select the arrear courses you want to register for:</h3>
         
         <?php
         foreach ($rows as $row) {
-            echo '<label><input type="checkbox" name="arrear_courses[]" value="' . $row['course_code'] . '"> ' . $row['course_code'] . ' - ' . fetch_course_name($conn, $row['course_code']) . '</label><br>';
+            echo '<label class = "arrear_courses"><input type="checkbox" name="arrear_courses[]" value="' . $row['course_code'] . '"> ' . $row['course_code'] . ' - ' . fetch_course_name($conn, $row['course_code']) . '</label><br>';
         }
         ?>
 
-        <input type="submit" name="submit" value="Register Selected Courses">
+        <input type="submit" name="submit" value="Register Selected Courses" class="submit_btn">
         </form>
 
     <?php

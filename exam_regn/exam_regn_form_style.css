@@ -61,9 +61,9 @@ form {
   margin: 0 auto;
 }
 
-.pay_btn{
-    margin: auto;
-    width:30%;
+.pay_btn {
+  margin: auto;
+  width: 30%;
 }
 
 .payment_btn {
@@ -75,4 +75,24 @@ form {
   font-size: 16px;
   border: #e0ebeb;
   border-radius: 2px;
+}
+
+.arrear_reg_form {
+  background-color: #ccddff;
+  width: fit-content;
+}
+
+.arrear_courses {
+  font-size: large;
+  margin: 1rem;
+}
+
+.submit_btn {
+  background-color: rgb(72, 69, 69);
+  color: white;
+  font-weight: 700;
+  height: 2rem;
+  padding: 0.5rem;
+  display: block;
+  margin: 1rem auto 1rem auto;
 }
