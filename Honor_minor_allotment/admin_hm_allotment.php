@@ -40,7 +40,7 @@
             echo("<td>".$reg['OPT3_PRGM_ID']."</td>");
             echo("</tr>");
         }
-        echo("</table>")
+        echo("</table>");
     ?>
     <button class="small_btn" onclick="goback()">Allot programmes</button>
 
