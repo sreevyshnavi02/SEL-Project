@@ -16,9 +16,9 @@
             console.log(input_fields);
 
             xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("txt").innerHTML = this.responseText;
-                }
+            }
             };
             xmlhttp.open("GET", "check_appn_num.php?q=" + entered_appn_num, true);
             xmlhttp.send();
@@ -253,5 +253,13 @@
             </tr>
         </table>
         </form>
+
+        <button class="small_btn" onclick="goback()">Back</button>
+
+        <script>
+            function goback() {
+                window.location.href = "../admin.php";
+            }
+        </script>
 </body>
 </html>
