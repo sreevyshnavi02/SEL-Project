@@ -9,6 +9,7 @@
 <body>
     <!-- display the allotments made and provide option to edit or drop an allotted prgm -->
     <?php
+        include '../header.php'; 
         $hm_allotments = $conn -> query("
         select h.regno, p.prgm_name, p.dept_id, h.allotment_date, h.withdrawal_date, r.cgpa, s.sname
         from u_hm_allotment h, u_student s, u_hm_preregistration r, u_prgm p
@@ -23,20 +24,29 @@
             echo("<th>CGPA</th>");
             echo("<th>Alloted Program</th>");
             echo("<th>Alloted Date</th>");
-            echo("<th>Withdrawal Date</th>");
+            // echo("<th>Withdrawal Date</th>");
             echo("</tr>");
 
         $hm_allotments = $hm_allotments -> fetchAll(PDO::FETCH_ASSOC);
         foreach($hm_allotments as $row){
             echo("<tr>");
-            echo("<td>".$row['REGNO']."</td>");
+            echo("<td>".$row['regno']."</td>");
             echo("<td>".$row['sname']."</td>");
-            echo("<td>".$row['CGPA']."</td>");
+            echo("<td>".$row['cgpa']."</td>");
             echo("<td>".$row['dept_id']." - ".$row['prgm_name']."</td>");
             echo("<td>".$row['allotment_date']."</td>");
-            echo("<td>".$row['withdrawal_date']."</td>");
+            // echo("<td>".$row['withdrawal_date']."</td>");
             echo("</tr>");
         }
+
     ?>
+    </table>
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../admin.php";
+        }
+    </script>
 </body>
 </html>
