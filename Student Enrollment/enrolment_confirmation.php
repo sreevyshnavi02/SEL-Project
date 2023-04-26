@@ -43,6 +43,8 @@
             $x['gender'] = 'Male';
         }
 
+        $dob = $x['dob'];
+        $formatted_date = date("d-m-Y", strtotime($dob)); // format date in dd mm yyyy format
 
         echo "<div id='makepdf'>
         <table class='left-align-table'>
@@ -51,7 +53,7 @@
         <tr><th>Admission mode</th><td>".$x['centac_or_josaa']."</td></tr>
         <tr><th>Father name</th><td>".$x['father_name']."</td></tr>
         <tr><th>Mother name</th><td>".$x['mother_name']."</td></tr>
-        <tr><th>Date </th><td>".$x['dob']."</td></tr>
+        <tr><th>Date </th><td>".$formatted_date."</td></tr>
         <tr><th>Gender</th><td>".$x['gender']."</td></tr>
         <tr><th>Contact</th><td>".$x['phone']."</td></tr>
         <tr><th>Email ID</th><td>".$x['personal_email']."</td></tr>
@@ -78,6 +80,14 @@
         html2pdf().from(makepdf).save();
     });
 </script> 
+
+<button class="small_btn" onclick="goback()">Back</button>
+
+<script>
+    function goback() {
+        window.location.href = "../admin.php";
+    }
+</script>
 
 </body>
 </html>
