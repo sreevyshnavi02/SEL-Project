@@ -18,7 +18,7 @@
     <?php 
         include '../header.php';
         $regno = $_SESSION['regno'];
-        $stud_details = $conn -> query ("
+        $stud_details_query = $conn -> query ("
         select s.regno, s.curr_sem, s.entry_mode, c.cgpa, c.sem, p.dept_id
         from u_student s, u_gpa_cgpa c, u_prgm p
         where s.regno = '$regno' 
@@ -26,7 +26,9 @@
         and s.curr_sem = c.sem 
         and s.prgm_id = p.prgm_id;");
 
-        $stud_details = $stud_details -> fetch(PDO::FETCH_ASSOC);
+        $stud_details = $stud_details_query -> fetch(PDO::FETCH_ASSOC);
+        $stud_exist = $stud_details_query -> rowCount();
+        if($stud_exist){
 
         $_SESSION['dept_id'] = $stud_details['dept_id'];
         $_SESSION['cgpa'] = $stud_details['cgpa'];
@@ -147,6 +149,7 @@
                 while ($row = $courses_result->fetch(PDO::FETCH_ASSOC)) {
                     echo '<option value="' . $row['PRGM_ID'] . '">' . $row['DEPT_ID'] .' - ' .$row['PRGM_NAME'] .'</option>';
                 }
+            }
 
             ?>
             </select>
@@ -158,10 +161,30 @@
 		<input type="submit" value="Submit" class="small_btn">
 	</form>
 
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../admin.php";
+        }
+    </script>
+
     <?php
     }
     else{
         echo "<h1 style='text-align:center'>You aren't eligible for Honor/Minor Programmes!</h1>";
+
+        //back navigation
+        ?>
+        <button class="small_btn" onclick="goback()">Back</button>
+
+        <script>
+            function goback() {
+                window.location.href = "../admin.php";
+            }
+        </script>
+
+    <?php
     }
     ?>
     
