@@ -163,7 +163,7 @@
 
         <script>
             function goback() {
-                window.location.href = "../admin.php";
+                window.location.href = "../student.php";
             }
         </script>
 
@@ -178,7 +178,7 @@
 
             <script>
                 function goback() {
-                    window.location.href = "../admin.php";
+                    window.location.href = "../student.php";
                 }
             </script>
 
