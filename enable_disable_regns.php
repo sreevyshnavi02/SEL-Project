@@ -54,12 +54,13 @@
             if ($row) {
                 $type = $row['registration_type'];
                 echo "<td>$type REGISTRATION</td>";
+
                 if ($row['start_date'] == NULL || $row['end_date'] != NULL) {
                     // Registration is enabled, show disable button
-                    echo '<td><button class = "small_btn" id = "'.$type.'-button" onclick="toggleRegistration(\''.$type.'\', \'enable\')">Enable '.$type.' registration</button></td>';
+                    echo '<td><button class = "small_btn" id = "'.$type.'-enable" onclick="toggleRegistration(\''.$type.'\', \'enable\')">Enable '.$type.' registration</button></td>';
                 } else if($row['end_date'] == NULL){
                     // Registration is disabled, show enable button
-                    echo '<td><button class = "small_btn" id = "'.$type.'-button" onclick="toggleRegistration(\''.$type.'\', \'disable\')">Disable '.$type.' registration</button></td>';
+                    echo '<td><button class = "small_btn" id = "'.$type.'-disable" onclick="toggleRegistration(\''.$type.'\', \'disable\')">Disable '.$type.' registration</button></td>';
                 }
             } else {
                 // Registration tracking not found, show error message
@@ -72,7 +73,6 @@
             ?>
 
 
-
     <script>
         function toggleRegistration(type, status) {
             var xhttp = new XMLHttpRequest();
@@ -82,13 +82,15 @@
                     console.log("over here" + this.responseText);
 
                     if (status == "enable") {
-                        const btnn = document.getElementById(type + "-button");
+                        const btnn = document.getElementById(type + "-enable");
                         btnn.innerHTML = "Disable " + type + " Registration";
                         btnn.setAttribute('onclick', "toggleRegistration(\''.$type.'\', \'disable\')");
+                        btnn.id = type + "-disable";
                     } else {
-                        const btnn = document.getElementById(type + "-button");
+                        const btnn = document.getElementById(type + "-disable");
                         btnn.innerHTML = "Enable " + type + " Registration";
                         btnn.setAttribute('onclick', "toggleRegistration(\''.$type.'\', \'enable\')");
+                        btnn.id = type + "-enable";
                     }
                 }
             };
