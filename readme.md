@@ -21,15 +21,16 @@ Tasks Involved:
 
 - **Module 4: Course Registration for each semester & Exam Registration at the end of each semester**
 
-- [ ] T11: Course Registration by students
+- [x] T11: Course Registration by students
 - [x] T12: Registration for regular exams
 - [x] T13: Registration for arrear exams
 
-- [ ] Provision to enable and disable various regns
+- **Additional tasks**
+- [x] Provision to enable and disable various regns
 - [ ] For course and exam regn - which sem?
 - [ ] Display options for regn only when it is enabled by admin
-- [ ] Back navigation in every page
-- [ ] Error handling - do not allow display of error msgs to the user
+- [x] Back navigation in every page
+- [x] Error handling - do not allow display of error msgs to the user
 - [ ] Check corner cases
 - [ ] Ensuring the user has come to the pages that need authentication only after logging in
 - [ ] Provision to download as pdf wherever reqd
