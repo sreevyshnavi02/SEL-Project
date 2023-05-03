@@ -101,5 +101,13 @@
             xhttp.send("type=" + type + "&status=" + status);
         }
     </script>
+
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../student.php";
+        }
+    </script>
 </body>
 </html>
