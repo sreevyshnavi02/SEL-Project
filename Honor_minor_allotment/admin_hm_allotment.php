@@ -42,12 +42,18 @@
         }
         echo("</table>");
     ?>
-    <button class="small_btn" onclick="goback()">Allot programmes</button>
+    <button class="small_btn" onclick="allot()">Allot programmes</button>
+    <button class="small_btn" onclick="goback()">Back</button>
 
     <script>
-        function goback() {
+        function allot() {
             window.location.href = "admin_allot_hm_logic.php";
         }
+
+        function goback() {
+            window.location.href = "../admin.php";
+        }
     </script>
+
 </body>
 </html>
