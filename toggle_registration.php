@@ -21,11 +21,13 @@
     // Insert or update the registration track record
     if($status == 'enable'){
         $sql = "INSERT INTO u_registration_track (registration_type, start_date, end_date, allotment_date, session)
-            VALUES ('$type', '$start_date', '$end_date', null, '$session')
-            ON DUPLICATE KEY UPDATE start_date='$start_date', end_date='$end_date'";
+            VALUES ('$type', '$start_date', null, null, '$session')
+            ON DUPLICATE KEY UPDATE start_date='$start_date'";
     }
     else{
-        $sql = "UPDATE u_registration_track SET end_date='$end_date' WHERE registration_type='$type' AND session='$session'";
+        $sql = "UPDATE u_registration_track 
+        SET end_date='$end_date' 
+        WHERE registration_type='$type' AND session='$session'";
     }
     $result = $conn->query($sql);
     if($result != false) {
