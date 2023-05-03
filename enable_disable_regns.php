@@ -57,10 +57,19 @@
 
                 if ($row['start_date'] == NULL || $row['end_date'] != NULL) {
                     // Registration is enabled, show disable button
-                    echo '<td><button class = "small_btn" id = "'.$type.'-enable" onclick="toggleRegistration(\''.$type.'\', \'enable\')">Enable '.$type.' registration</button></td>';
-                } else if($row['end_date'] == NULL){
+                    echo '<td>
+                            <button class = "small_btn" id = "'.$type.'-enable" onclick="toggleRegistration(\''.$type.'\', \'enable\')">
+                                Enable '.$type.' registration
+                            </button>
+                        </td>';
+                } 
+                else if($row['end_date'] == NULL){
                     // Registration is disabled, show enable button
-                    echo '<td><button class = "small_btn" id = "'.$type.'-disable" onclick="toggleRegistration(\''.$type.'\', \'disable\')">Disable '.$type.' registration</button></td>';
+                    echo '<td>
+                            <button class = "small_btn" id = "'.$type.'-disable" onclick="toggleRegistration(\''.$type.'\', \'disable\')">
+                                Disable '.$type.' registration
+                            </button>
+                        </td>';
                 }
             } else {
                 // Registration tracking not found, show error message
