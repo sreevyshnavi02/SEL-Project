@@ -44,5 +44,14 @@
         echo "<h1 style='text-align:center'>You aren't eligible for OEC Registration!</h1>";
     }
     ?>
+
+    
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../student.php";
+        }
+    </script>
 </body>
 </html>
