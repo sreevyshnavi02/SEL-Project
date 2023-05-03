@@ -24917,3 +24917,14 @@ INSERT INTO `u_hm_allotment`(`regno`, `alloted_prgm`) VALUES ('18CE1005', '27');
 
 INSERT INTO `u_external_marks`(`REGNO`, `COURSE_CODE`, `SESSION`, `GRADE`) VALUES ('18CE1004', 'SH202', '22A', 'F');
 INSERT INTO `u_external_marks`(`REGNO`, `COURSE_CODE`, `SESSION`, `GRADE`) VALUES ('18CE1005', 'SH202', '22A', 'F');
+
+
+-- to track various student registrations
+CREATE TABLE `u_registration_track` (
+  `registration_type` varchar(50) NOT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `allotment_date` datetime DEFAULT NULL,
+  `session` varchar(5) NOT NULL,
+  PRIMARY KEY (`registration_type`, `session`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
