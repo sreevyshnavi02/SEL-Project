@@ -84,15 +84,11 @@
                     if (status == "enable") {
                         const btnn = document.getElementById(type + "-button");
                         btnn.innerHTML = "Disable " + type + " Registration";
-                        btnn.onclick() = function{
-                            toggleRegistration(\''.$type.'\', \'disable\');
-                        }
+                        btnn.setAttribute('onclick', "toggleRegistration(\''.$type.'\', \'disable\')");
                     } else {
                         const btnn = document.getElementById(type + "-button");
                         btnn.innerHTML = "Enable " + type + " Registration";
-                        btnn.onclick() = function{
-                            toggleRegistration(\''.$type.'\', \'enable\');
-                        }
+                        btnn.setAttribute('onclick', "toggleRegistration(\''.$type.'\', \'enable\')");
                     }
                 }
             };
@@ -106,7 +102,7 @@
 
     <script>
         function goback() {
-            window.location.href = "../student.php";
+            window.location.href = "./enable_disable_regns_session.php";
         }
     </script>
 </body>
