@@ -14,7 +14,6 @@
         $formatted_year = $year[strlen($year) - 2].$year[strlen($year) - 1];
         $_SESSION['chosen_session'] = $formatted_year.$_POST['session_month'];
 
-
         $regno = $_SESSION['regno'];   //entered during login
         //-------temporary--------
         //to get the session as input from the user
@@ -36,12 +35,17 @@
             //check if the capacity is reached for an oec before displaying it
 
             $fetch_oec_sql = "select e.course_code, c.course_name, c.course_type 
-            from u_prgm_elective_course e, u_course c 
+            from u_prgm_elective_course e, u_course c, u_student s, u_prgm p
             where e.no_of_students_enrolled < e.capacity 
-            and e.session = :sess and e.course_code = c.course_code";
+            and e.session = :sess 
+            and e.course_code = c.course_code 
+            and s.regno = :regno
+            and s.prgm_id = p.prgm_id 
+            and c.dept_id != p.dept_id";
 
             $fetch_oec_query = $conn -> prepare($fetch_oec_sql);
             $fetch_oec_query -> bindParam(':sess', $session);
+            $fetch_oec_query -> bindParam(':regno', $regno);
             $fetch_oec_query -> execute();
 
             $fetch_oec = $fetch_oec_query -> fetchAll(PDO::FETCH_ASSOC);
