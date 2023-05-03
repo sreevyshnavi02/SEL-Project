@@ -123,6 +123,15 @@
     </div>
 
     <button class="small_btn" id="print">Download</button>
+
+    <button class="small_btn" onclick="goback()">Back</button>
+
+    <script>
+        function goback() {
+            window.location.href = "../student.php";
+        }
+    </script>
+
     <script>
         console.log('print pdf');
         var button = document.getElementById("print");
